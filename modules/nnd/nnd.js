@@ -1210,7 +1210,7 @@
     } else if (hiddenLayers < nwk.layers.length-2) {nwk.layers.splice(hiddenLayers+1, nwk.layers.length-2-hiddenLayers);}
     if (nwk.layers.length > 2 && hiddenNeurons != nwk.layers[1].length-nwk.bias) {
       for (i = 1; i < nwk.layers.length-1; i++) {
-        nwk.layers[i] = !nwk.bias ? [] : [nwk.layers[i].at(-1)];
+        nwk.layers[i] = !nwk.bias || !nwk.layers[i].length ? [] : [nwk.layers[i].at(-1)];
         while (nwk.layers[i].length-nwk.bias < hiddenNeurons) {nwk.layers[i].unshift({});}
       }
     }
