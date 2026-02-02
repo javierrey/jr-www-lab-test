@@ -1,6 +1,6 @@
 <!-- nnd/nnd.htm -->
-<link type="text/css" rel="stylesheet" href="./modules/nnd/nnd.css"/>
-<script type="module" src="./modules/nnd/nnd.js"></script>
+<!--link type="text/css" rel="stylesheet" href="./comps.css"/-->
+<!--link type="text/css" rel="stylesheet" href="./nnd.css"/-->
 <!--script src="./nnd.js"></script-->
 <div x-id="nn_content" class="user-select-none" align="center">
 <div x-id="nn_title" align="center">
@@ -44,6 +44,9 @@
           <br/>
           Bias <input type="range" x-id="bias_neurons" value="1" min="0" max="1" style="width: 2.5em;"/>
           [<span x-id="bias_neurons_label"></span>]
+          <span style="display: none;">
+            &nbsp; freeze <input type="range" x-id="freeze_bias" value="0" min="0" max="1" style="width: 2.5em;"/>
+          </span>
           <br/>
         </div>
         <div>
@@ -120,11 +123,14 @@
         <div>
           DataSets:
           <button type="button" x-id="prev_data">&lt;</button>
+          <button type="button" x-id="new_data">+</button>
           <button type="button" x-id="next_data">&gt;</button>
           <button type="button" x-id="save_data">Set</button>
           <button type="button" x-id="delete_data">Unset</button>
           <button type="button" x-id="clear_data">Clear</button>
-          [<span>Data Diff <span x-id="data_diff_label"></span></span>][<span>Value Diff <span x-id="value_diff_label"></span></span>]
+          <span style="display: none;">
+            [<span>Data Diff <span x-id="data_diff_label"></span></span>][<span>Value Diff <span x-id="value_diff_label"></span></span>]
+          </span>
           <br/>
           Selected Neuron Target
           <input type="text" x-id="selected_target" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"

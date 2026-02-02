@@ -60,10 +60,10 @@
 
   nn.vars.beep = new Audio('data:audio/wav;base64,UklGRkkDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSUDAACaiGOgVm+pbYOahVSfbGmeeoeFj16ZaWqnbYGViliiZXGfaYiafl2pV3mdbYGefWGkUYeWb4abcmilU4mPc4acbnGdU5GLcoedZnyYUpiIcoueXoiMU6J/do+YV5OCWal2dpaPVaJxZqdufZaGWKZlc6Juf5h8X6ZfgJxsfpxzaaZYhZdtgZ1sb6RTj5NqhZdybqNSjZNoi5N4Z6RSiZdojJZvbaVIlo9njpdodp5Gnohsi5xgfZxHooBxjZlbiI9NqHdyjZdckYZRqHN2kJZZlX5YqG95k5BZnnBipm19lolZpmJwoml/m39grFOBmmmFnHlmpk6KlW6InGpwoU6Tj26KnmN6mU+ajG+Mml6ElFGignCNlmWBl0uig3GOlWp4nUuigm+RlWSElUeqeHOUlV2NiUytdHaSmFeUgVGtb3uVkVaccluua3+UjFeibGSpaIGViFqkYm6nZ4SXf1+oWXqgZoWbdmanT4qWZ4ida3OiR5mKbI2bY3ycSp6FbY2cXIiQTqWAbpCWWZOGU6Z7cZSSWJl/WKpyeJOSXZOCU69xe5CSX42JUrFvepOQW5l7VrZof5aMVqJxX7JpgJWMVKdoa61mhJeDWatcd6hmhZWBXqxXfqBliJd9Y6pRh5pniJp2a6ZLkJFrjJtrdp5Hnoduj5pfhpJIqXtzj5Zbj4hQqHZ2kpNXmXxZqHN4lY1XnnFhqnF4l4VZpGtpqWl/kolboW1krWWDj45cnXBhrmSElYlap2BqrV+Kl4JZqld2p2OHmn5brE+CoWSLmXVlq0qNmGaMmnFpp0mWkWeMmW5ypEaaimuQmWZ7mkijgm6PmV+KkEqpdnKUlliYe1OtbnqUkVWfcVyqbHuYiliiZWiobH6ZgFulXnGlaYGbeV6lV3yiZIaTfl6mWXekYYmOhVqnW3WmYIqTfF+tTIOeXo+XdmOsRoyWZYyacGioQ5eOZo6ZaHSiQZ+Ha4+YY3qdQ6SBbo2ZYoKTRql7cpGVXI2JTqxydZSVWJp3Vq9sfZeLVaZoZ6tngpiGWKpecqdngpp+X6pWfaFohZx1ZqdShpxoh5tu');
 
-  nn.vars.AND = JSON.stringify({name:'AND',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,0,0]}]]});
-  nn.vars.OR = JSON.stringify({name:'OR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,1,1]}]]});
-  nn.vars.XOR = JSON.stringify({name:'XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[0,0,1,1]}]]});
-  nn.vars.AND_OR_XOR = JSON.stringify({name:'AND_OR_XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,0,0]},{targets:[1,0,1,1]},{targets:[0,0,1,1]}]]});
+  nn.vars.AND = JSON.stringify({name:'AND',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,freezeBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,0,0]}]]});
+  nn.vars.OR = JSON.stringify({name:'OR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,freezeBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,1,1]}]]});
+  nn.vars.XOR = JSON.stringify({name:'XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,freezeBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[0,0,1,1]}]]});
+  nn.vars.AND_OR_XOR = JSON.stringify({name:'AND_OR_XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,freezeBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{},{},{},{},{targets:[0,0,0,0]}],[{targets:[1,0,0,0]},{targets:[1,0,1,1]},{targets:[0,0,1,1]}]]});
 
   nn.container = null;
   nn.content = null;
@@ -249,8 +249,8 @@
   nn.neuron_value = function (nrn, val) {
     if (val < nrn.minValue) {val = nrn.minValue;} else if (val > nrn.maxValue) {val = nrn.maxValue;}
     if (nrn.parents.length) {
-      var diff = nrn.value-val, gap = Math.min(Math.abs(diff), nrn.parent.learningMatch)/2, time = new Date().getTime();
-      while (Math.abs(diff) > gap && new Date().getTime()-time < nn.vars.ms.WAIT) {
+      var diff = nrn.value-val, gap = Math.min(Math.abs(diff), nrn.parent.learningMatch)/2, time = Date.now();
+      while (Math.abs(diff) > gap && Date.now()-time < nn.vars.ms.WAIT) {
         nn.neuron_pull(nrn, diff/2);
         nn.neuron_calculate(nrn);
         diff = nrn.value-val;
@@ -388,16 +388,17 @@
     if ('length' in nwk) {nwk = {layers: nwk};}
     var i, j, lengths = []; nn.nets ??= {};
     nwk.name = nwk.name||'NN'; nn.nets[nwk.name] = nwk;
-    nwk.adaptNeurons = nwk.adaptNeurons||0;
-    nwk.adaptRate = nwk.adaptRate||0;
-    nwk.training = nwk.training||0;
-    nwk.trainingPeriod = nwk.trainingPeriod||1e3;
-    nwk.trainingCycles = nwk.trainingCycles||0;
-    nwk.trainingTime = nwk.trainingTime||0;
-    nwk.trainingError = nwk.trainingError||0;
-    nwk.trainingDelta = nwk.trainingDelta||0;
-    nwk.trainingStart = nwk.trainingStart||0;
-    nwk.convergence = nwk.convergence||0;
+    nwk.freezeBias ||= 0;
+    nwk.adaptNeurons ||= 0;
+    nwk.adaptRate ||= 0;
+    nwk.training ||= 0;
+    nwk.trainingPeriod ||= 1e3;
+    nwk.trainingCycles ||= 0;
+    nwk.trainingTime ||= 0;
+    nwk.trainingError ||= 0;
+    nwk.trainingDelta ||= 0;
+    nwk.trainingStart ||= 0;
+    nwk.convergence ||= 0;
     nwk.lastSelectedNeuron = nwk.selectedNeuron = null;
     if (nwk.shuffleData == null) {nwk.shuffleData = 1;}
     if (nwk.selectedTarget == null) {nwk.selectedTarget = -1;}
@@ -434,8 +435,8 @@
   };
 
   nn.network_setActivation = function (nwk, method, iv, ov, rx) {
-    iv = iv||{}; ov = ov||{}; rx = rx||{};
-    var aV = nn.vars.actVals; method = method||nwk.activationMethod; if (!nn[aV.ACT+method]) {method = aV.SIGMOID;}
+    iv ||= {}; ov ||= {}; rx ||= {};
+    var aV = nn.vars.actVals; method ||= nwk.activationMethod; if (!nn[aV.ACT+method]) {method = aV.SIGMOID;}
     nwk.activationMethod = method; nwk.activation = nn[aV.ACT+method]; nwk.activationPrime = nn[aV.ACT+method+aV.PRIME]; // Centered/Positive:
     if (method == aV.TANGENT || method == aV.LINEAR) {aG.w = 1; aG.h = 1; aG.x = 0; aG.y = 0;} else {aG.w = 1; aG.h = .5; aG.x = 0; aG.y = .5;}
     aG.h0 = (ov.min != null) ? ov.min : (nwk.minOutputValue != null) ? nwk.minOutputValue : (ov.max != null) ? 2*aG.y-ov.max : aG.y-aG.h;
@@ -456,7 +457,7 @@
     var keyset = Object.keys(nwk.layers[0][0].targets); if (!keyset.length) {return;}
     var i, nrn, match, miss, keys, lay, cycle = -1, matches = 0, error = 0, delta = 0;
     var lastlayer = nwk.layers.length-1, input = nwk.layers[0], output = nwk.layers.at(-1);
-    nwk.trainingCycles = nwk.trainingCycles||0; nwk.trainingStart = nwk.trainingStart||new Date().getTime();
+    nwk.trainingCycles ||= 0; nwk.trainingStart ||= Date.now();
     while (++cycle < nwk.trainingPeriod) {
       match = 0; miss = 0; keys = keyset.slice(0);
       while (keys.length) {
@@ -495,7 +496,7 @@
       } else if (++matches > 1 || nwk.trainingPeriod == 1) {nwk.training = -1; cycle++; break;}
     }
     nwk.trainingCycles += cycle; nwk.trainingError = error; nwk.trainingDelta = delta;
-    nwk.trainingTime = new Date().getTime()-nwk.trainingStart;
+    nwk.trainingTime = Date.now()-nwk.trainingStart;
   };
 
   nn.network_convergence = function (nwk, error, delta) {
@@ -556,7 +557,7 @@
       for (var j = 0; j < nwk.layers[i].length; j++) {
         var nrn = nwk.layers[i][j];
         if (!nrn.row || nrn.isOutput || nrn.isBias) {
-          nrn.isBias && nrn.targets.fill(nrn.value); // same target for all
+          nrn.isBias && nwk.freezeBias && nrn.targets.fill(nrn.value); // same target for all
           if (pos < nwk.targetsLength) {nrn.targets[pos] = nrn.value;
           } else {nrn.targets.push(nrn.value);}
         }
@@ -683,6 +684,7 @@
       exp.minOutputValue = nwk.minOutputValue; exp.maxOutputValue = nwk.maxOutputValue;
       exp.minDomainValue = nwk.minDomainValue; exp.maxDomainValue = nwk.maxDomainValue;
       exp.bias = nwk.bias;
+      exp.freezeBias = nwk.freezeBias;
     }
     exp.layers = [];
     for (i = 0; i < nwk.layers.length; i++) {
@@ -983,7 +985,7 @@
       if (nn.enableBeep && !tr) {nn.vars.beep.play();}
     } else {
       if (!nn.extendStats) {nwk.trainingTime = nwk.trainingCycles = nwk.trainingError = nwk.trainingDelta = 0;}
-      nwk.trainingStart = new Date().getTime()-nwk.trainingTime; nn.enableBeep = 0; clearTimeout(nn.vars.enableBeep_to||0);
+      nwk.trainingStart = Date.now()-nwk.trainingTime; nn.enableBeep = 0; clearTimeout(nn.vars.enableBeep_to||0);
       nn.vars.enableBeep_to = setTimeout(function () {nn.enableBeep = Number(fE.enable_beep.value);}, 5e3);
     }
     if (tr || nwk.training >= 0) {nwk.training = tr;}
@@ -1141,6 +1143,7 @@
     var biasNeurons = nwk.bias*(hiddenLayers+1);
     fE.network_name.value = nwk.name;
     fE.bias_neurons.value = nwk.bias;
+    fE.freeze_bias.value = nwk.freezeBias;
     fE.input_neurons.value = inputNeurons;
     fE.output_neurons.value = outputNeurons;
     fE.hidden_neurons.value = hiddenNeurons;
@@ -1194,6 +1197,7 @@
 
   nn.setLayers = function (nwk) {
     nwk ??= nn.net; if (!nwk) {return;}
+    nwk.freezeBias = Number(fE.freeze_bias.value)||0;
     var i, bias = Number(fE.bias_neurons.value)||0;
     var hiddenLayers = Number(fE.hidden_layers.value)||0; if (hiddenLayers < 0) {hiddenLayers = 0;}
     var hiddenNeurons = Number(fE.hidden_neurons.value)||1; if (hiddenNeurons < 1) {hiddenNeurons = 1;}
@@ -1270,6 +1274,7 @@
   nn.createNetwork = function (name) {
     var i, nwk = {}; nwk.name = name||'NN';
     nwk.bias = Number(fE.bias_neurons.value)||0;
+    nwk.freezeBias = Number(fE.freeze_bias.value)||0;
     var inputNeurons = Number(fE.input_neurons.value)||1;
     var outputNeurons = Number(fE.output_neurons.value)||1;
     var hiddenNeurons = Number(fE.hidden_neurons.value)||1;
@@ -1504,9 +1509,8 @@
       if (tgt == fE.hidden_neurons_higher) {tgt = fE.hidden_neurons; num = Number(tgt.value); tgt.value = num+1;}
       if (tgt == fE.hidden_layers_lower) {tgt = fE.hidden_layers; num = Number(tgt.value); tgt.value = num-1;}
       if (tgt == fE.hidden_layers_higher) {tgt = fE.hidden_layers; num = Number(tgt.value); tgt.value = num+1;}
-      if ([fE.bias_neurons, fE.hidden_layers, fE.hidden_neurons, fE.input_neurons, fE.output_neurons].includes(tgt)) {
-        nn.setLayers(null);
-      }
+      [fE.bias_neurons, fE.freeze_bias, fE.hidden_layers, fE.hidden_neurons, fE.input_neurons, fE.output_neurons]
+        .includes(tgt) && nn.setLayers(null);
       if (tgt == fE.min_input_value) {nn.setActivation(null, null, {min: num}, null, null);
       } else if (tgt == fE.max_input_value) {nn.setActivation(null, null, {max: num}, null, null);
       } else if (tgt == fE.min_output_value) {nn.setActivation(null, null, null, {min: num}, null);
@@ -1531,6 +1535,7 @@
       if (tgt == fE.save_data) {nn.saveData(null);}
       if (tgt == fE.prev_data) {nn.nextData(null, -1);}
       if (tgt == fE.next_data) {nn.nextData(null, 1);}
+      if (tgt == fE.new_data) {nn.nextData(null, 0);}
       if (tgt == fE.train_data) {nn.changeTraining(null, null);}
       if (tgt == fE.bottom_up) {nn.setCanvasTopDown(null);}
       if (tgt == fE.canvas_hide) {nn.canvasDisplay(-1);}
@@ -1568,6 +1573,7 @@
     el = fE.min_domain_value = nn.form.querySelector('[x-id="min_domain_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.max_domain_value = nn.form.querySelector('[x-id="max_domain_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.bias_neurons = nn.form.querySelector('[x-id="bias_neurons"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.freeze_bias = nn.form.querySelector('[x-id="freeze_bias"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.hidden_layers = nn.form.querySelector('[x-id="hidden_layers"]')||{}; if (el.tagName) {el.onchange = eventListener;}
     el = fE.hidden_layers_lower = nn.form.querySelector('[x-id="hidden_layers_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.hidden_layers_higher = nn.form.querySelector('[x-id="hidden_layers_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
@@ -1596,6 +1602,7 @@
     el = fE.save_data = nn.form.querySelector('[x-id="save_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.prev_data = nn.form.querySelector('[x-id="prev_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.next_data = nn.form.querySelector('[x-id="next_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.new_data = nn.form.querySelector('[x-id="new_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.random_weights = nn.form.querySelector('[x-id="random_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.fixed_weights = nn.form.querySelector('[x-id="fixed_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.lose_weights = nn.form.querySelector('[x-id="lose_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
@@ -1650,14 +1657,14 @@
 
   nn.onpointerdownListener = function (ev) {
     nn.view.pointer.target = ev.target; nn.view.pointer.down = true; nn.view.pointer.dragging = false;
-    nn.view.pointer.downtime = new Date().getTime();
+    nn.view.pointer.downtime = Date.now();
     nn.setPointerXY(nn.view.pointer, ev, true);
     if (nn.view.pointer.target == nn.canvas) {nn.canvas_onpointerdown(ev); nn.updateSelected(null);}
     nn.view.pointer.preventMove = true; // @show/hide prevent.
   };
 
   nn.onpointerupListener = function (ev) {
-    var time = new Date().getTime(); nn.view.pointer.dblclick = time-nn.view.pointer.uptime < nn.vars.ms.WATCH; // dblclick threshold
+    var time = Date.now(); nn.view.pointer.dblclick = time-nn.view.pointer.uptime < nn.vars.ms.WATCH; // dblclick threshold
     nn.view.pointer.uptime = nn.view.pointer.dblclick ? 0 : time;
     nn.setPointerXY(nn.view.pointer, ev, true);
     if (nn.view.pointer.target == nn.canvas) {nn.canvas_onpointerup(ev); nn.updateSelected(null);}
