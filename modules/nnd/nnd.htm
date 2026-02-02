@@ -1,0 +1,193 @@
+<!-- nnd/nnd.htm -->
+<link type="text/css" rel="stylesheet" href="./modules/nnd/nnd.css"/>
+<script type="module" src="./modules/nnd/nnd.js"></script>
+<!--script src="./nnd.js"></script-->
+<div x-id="nn_content" class="user-select-none" align="center">
+<div x-id="nn_title" align="center">
+  <!--a class="cursor-pointer vertical-align-sup" onclick=""><i class="icon-mi font-size-1-4" x-desc="info">&#xe88e;</i></a-->
+</div>
+<div x-id="nn_main" align="center" style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <div x-id="nn_canvas_container"></div>
+  <div style="margin-inline: 1em;">
+    <div x-id="nn_help" align="center" style="min-height: 0.5em;">
+      <!--div style="display: inline-block; text-align: left; vertical-align: top;">
+        Drag nodes to change values.
+        Click to lock/unlock.
+        Double click to center value.
+      </div-->
+    </div>
+    <div x-id="nn_form_content" class="-form" align="center">
+      <div style="display: inline-block; text-align: left; vertical-align: top; width: 18em;">
+        <div>
+          Network: Name
+          <input type="text" x-id="network_name" value="NN" pattern="(^\s)+" maxlength="1024" style="width: 9em;"/>
+          <br/>
+          Input
+          <button type="button" x-id="input_neurons_lower">&lt;</button>
+          <input type="text" x-id="input_neurons" value="2" pattern="[1-9]+" style="width: 5em; text-align: right;"/>
+          <button type="button" x-id="input_neurons_higher">&gt;</button>
+          <br/>
+          Output
+          <button type="button" x-id="output_neurons_lower">&lt;</button>
+          <input type="text" x-id="output_neurons" value="2" pattern="[1-9]+" style="width: 5em; text-align: right;"/>
+          <button type="button" x-id="output_neurons_higher">&gt;</button>
+          <br/>
+          H. Layers
+          <button type="button" x-id="hidden_layers_lower">&lt;</button>
+          <input type="text" x-id="hidden_layers" value="2" pattern="\d+" style="width: 5em; text-align: right;"/>
+          <button type="button" x-id="hidden_layers_higher">&gt;</button>
+          <br/>
+          H.L. Nodes
+          <button type="button" x-id="hidden_neurons_lower">&lt;</button>
+          <input type="text" x-id="hidden_neurons" value="2" pattern="[1-9]+" style="width: 5em; text-align: right;"/>
+          <button type="button" x-id="hidden_neurons_higher">&gt;</button>
+          <br/>
+          Bias <input type="range" x-id="bias_neurons" value="1" min="0" max="1" style="width: 2.5em;"/>
+          [<span x-id="bias_neurons_label"></span>]
+          <br/>
+        </div>
+        <div>
+          Activation:
+          <select x-id="activation_method" style="width: 10em;">
+            <option value="Sigmoid">Sigmoid</option>
+            <option value="Tangent">Tangent</option>
+            <option value="Parabolic">Parabolic</option>
+            <option value="Linear">Linear</option>
+          </select>
+          <br/>
+          <span style="display: block;"><!-- Display none, block -->
+            Output Range
+            <input type="range" x-id="min_output_value" value="0" min="-1" max="0" style="width: 2.5em;"/>
+            [<span x-id="min_output_value_label"></span>, <span x-id="max_output_value_label"></span>]
+            <input type="range" x-id="max_output_value" value="1" min="0" max="1" style="width: 2.5em; display: none;"/>
+            <br/>
+          </span>
+          <span style="display: block;"><!-- Display none, block -->
+            Input Range
+            <input type="range" x-id="min_input_value" value="0" min="-1" max="0" style="width: 2.5em;"/>
+            [<span x-id="min_input_value_label"></span>, <span x-id="max_input_value_label"></span>]
+            <input type="range" x-id="max_input_value" value="1" min="0" max="1" style="width: 2.5em; display: none;"/>
+            <br/>
+          </span>
+          <span style="display: block;"><!-- Display none, block -->
+            Domain
+            <input type="range" x-id="min_domain_value" value="-1" min="-1" max="0" style="width: 2.5em;"/>
+            [<span x-id="min_domain_value_label"></span>, <span x-id="max_domain_value_label"></span>]
+            <input type="range" x-id="max_domain_value" value="1" min="0" max="1" style="width: 2.5em; display: none;"/>
+            <br/>
+          </span>
+          </div>
+        <div>
+          Weights:
+          <button type="button" x-id="fixed_weights">Fix</button>
+          <button type="button" x-id="random_weights">Random</button>
+          <button type="button" x-id="lose_weights">Lose</button>
+          <br/>
+        </div>
+      </div>
+      <div style="display: inline-block; text-align: left; vertical-align: top; width: 40em;">
+        <div>
+          Canvas:
+          <button type="button" x-id="canvas_hide">Hide/Show</button>
+          <button type="button" x-id="collapse_layers">Collapse/Expand</button>
+          <button type="button" x-id="bottom_up">Down/Up</button>
+          <button type="button" x-id="canvas_theme" style="display: inline-block;">Light/Dark</button><!-- Display none, inline-block -->
+          <br/>
+          <div style="display: inline-block; min-width: 16em;">
+            <select x-id="samples_data" required="required" style="width: 15em;">
+              <option value="">Network Samples</option>
+              <optgroup label="Simple">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+                <option value="XOR">XOR</option>
+              </optgroup>
+              <optgroup label="Complex">
+                <option value="AND_OR_XOR">AND+OR+XOR</option>
+              </optgroup>
+            </select>
+          </div>
+          Horizontal Offset<input type="range" x-id="col_offset" value="0" min="0" max="1" step="0.01" style="width: 5em;"/>
+          [<span><span x-id="col_offset_label"></span> / <span x-id="max_col_offset_label"></span></span>]
+          <br/>
+          <div style="display: inline-block; min-width: 16em;">
+            Function Graph<input type="range" x-id="activation_graph" value="0" min="0" max="1" style="width: 2.5em;"/>
+            [<span x-id="activation_graph_label"></span>]
+          </div>
+          Vertical Offset<input type="range" x-id="row_offset" value="0" min="0" max="1" step="0.01" style="width: 5em;"/>
+          [<span><span x-id="row_offset_label"></span> / <span x-id="max_row_offset_label"></span></span>]
+          <br/>
+        </div>
+        <div>
+          DataSets:
+          <button type="button" x-id="prev_data">&lt;</button>
+          <button type="button" x-id="next_data">&gt;</button>
+          <button type="button" x-id="save_data">Set</button>
+          <button type="button" x-id="delete_data">Unset</button>
+          <button type="button" x-id="clear_data">Clear</button>
+          [<span>Data Diff <span x-id="data_diff_label"></span></span>][<span>Value Diff <span x-id="value_diff_label"></span></span>]
+          <br/>
+          Selected Neuron Target
+          <input type="text" x-id="selected_target" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            value="" pattern="\d*\.?\d*[eE]?-?\d*" style="width: 6em; text-align: right;"/>
+          [<span>Target <span x-id="dataset_label"></span> / <span x-id="datasets_label"></span></span>]
+          <br/>
+          Selected Neuron Value
+          <input type="text" x-id="selected_neuron" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            value="" pattern="\d*\.?\d*[eE]?-?\d*" style="width: 6em; text-align: right;"/>
+          <button type="button" x-id="selected_neuron_pin">Pin</button>
+          [<span x-id="selected_neuron_label"></span>]
+          <br/>
+        </div>
+        <div>
+          Learning:
+          <input type="text" x-id="learning_match" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            value="" pattern="\d*\.?\d*[eE]?-?\d*" style="width: 6em; text-align: right;"/>
+          Match
+          <button type="button" x-id="learning_match_lower">&lt;</button>
+          <button type="button" x-id="learning_calc">From Diff</button>
+          <button type="button" x-id="learning_rate_higher">&gt;</button>
+          Rate
+          <input type="text" x-id="learning_rate" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            value="" pattern="\d*\.?\d*[eE]?-?\d*" style="width: 6em; text-align: right;"/>
+          <br/>
+        </div>
+        <div>
+          Train:
+          Refresh<input type="range" x-id="training_period" value="3" min="0" max="9" style="width: 5em;"/>
+          [<span x-id="training_period_label"></span>]<!-- Display none, inline-block: -->
+          <span style="display: inline-block;">Adapt Neurons<input type="range" x-id="adapt_neurons" value="0" min="0" max="1" style="width: 2.5em;"/></span>
+          <span style="display: inline-block;">Adapt Rate<input type="range" x-id="adapt_rate" value="0" min="0" max="1" style="width: 2.5em;"/></span>
+          <br/>
+          Shuffle Data<input type="range" x-id="shuffle_data" value="1" min="0" max="1" style="width: 2.5em;"/>
+          Auto Export<input type="range" x-id="auto_export" value="1" min="0" max="1" style="width: 2.5em;"/>
+          Extend Stats<input type="range" x-id="extend_stats" value="0" min="0" max="1" style="width: 2.5em;"/>
+          Beep<input type="range" x-id="enable_beep" value="0" min="0" max="1" style="width: 2.5em;"/>
+          <br/>
+          <button type="button" x-id="train_data">Train/Stop</button>
+          [<span x-id="data_sets"></span>]
+          [<span x-id="data_stats"></span>]
+          [<span x-id="data_error"></span>]
+          <br/>
+        </div>
+        <div>
+          Export:
+          Layers Only<input type="range" x-id="layers_only" value="0" min="0" max="1" style="width: 2.5em;"/>
+          Targets Only<input type="range" x-id="targets_only" value="0" min="0" max="1" style="width: 2.5em;"/>
+          <span style="display: none;">Long Values<input type="range" x-id="long_values" value="0" min="0" max="1" style="width: 2.5em;"/></span><!-- Display none, inline-block -->
+          <button type="button" x-id="format_net">Format</button>
+          <br/>
+          <div style="float: left; text-align: right; margin-right: 0.3em;">
+            <div style="white-space: nowrap;"><button type="button" x-id="export_net">Export</button> &gt;</div>
+            <div style="white-space: nowrap;"><button type="button" x-id="import_net">Import</button> &lt;</div>
+          </div>
+          <div class="textarea" style="float: left; width: 27em; height: 6em;">
+            <textarea x-id="net_json" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          </div>
+          <br style="clear: both;"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div x-id="nn_foot" align="center" style="min-height: 0.5em;"></div>
+</div>

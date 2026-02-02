@@ -1,0 +1,91 @@
+<ul class="-menu -horizontal -noShadow">
+<script>
+(function ready() {
+  if (!document.body || !window.aa || !aa.lay || !aa.lay.menu || !aa.Main) {return setTimeout(ready, aa.vars.ms.LISTEN);}
+})();
+</script>
+  <li class="-hasSubmenu -layChildrenRight">
+    <a><i class="icon-mi" x-desc="">&#xe5d2;</i></a>
+    <ul class="-layChildrenRight">
+      <li><a onclick="aa.Main&&aa.Main.loadHome&&aa.Main.loadHome();">
+        <i class="icon-mi" x-desc="home">&#xe88a;</i> Home
+      </a></li>
+      <li><a onclick="aa.Main&&aa.Main.loadNND&&aa.Main.loadNND();">
+        <i class="icon-mi" style="transform: rotate(0deg);" x-desc="share">&#xe335;</i> Interactive Neural Network
+      </a></li>
+      <li class="-hasSubmenu">
+        <a><i class="icon-mi" x-desc="tool-spanner">&#xe869;</i> Lab</a>
+        <ul>
+          <li class="-testForm"><a onclick="aa.Main&&aa.Main.loadTestForm&&aa.Main.loadTestForm();">
+            <i class="icon-mi" x-desc="form">&#xe02f;</i> Test Form
+          </a></li>
+          <li class="-FormJson"><a onclick="aa.Main&&aa.Main.loadFormJson&&aa.Main.loadFormJson();">
+            <i class="icon-mi" x-desc="form">&#xe02f;</i> Form to Json
+          </a></li>
+          <li><a>Ipsum</a></li>
+          <li><a>Dolor</a></li>
+          <li><a>Amet</a></li>
+        </ul>
+      </a></li>
+      <li><a onclick="aa.lay.inBM(aa.Main.i0.content, '', null, 1);">
+        <i class="icon-mi" x-desc="bin">&#xe872;</i> Remove Content
+      </a></li>
+      <li><hr/></li>
+      {{js:(!window.aa.log || window.aa.log.ini.mode != "hidden") ? '<'+'!--' : '';}}
+      <li><a onclick="aa.log&&aa.log.toggleConsole(1);"><i class="icon-mi" x-desc="console">&#xe06d;</i> {{document_console}}</a></li>
+      {{js:(!window.aa.log || window.aa.log.ini.mode != "hidden") ? '--'+'>' : '';}}
+      <li><a onclick="aa.lay.toggleFullScreen();"><i class="icon-mi" x-desc="horizontal-mobile">&#xe32f;</i> Toggle Full Screen</a></li>
+      <li class="-section"><i></i> <i>Section {{document_console}}</i> <i></i></li>
+      <li class="-hasSubmenu">
+        <a>Sub-menu</a>
+        <ul>
+          <li><a>Bacon</a></li>
+          <li><a>Ipsum</a></li>
+          <li><a>Dolor</a></li>
+          <li><a>Amet</a></li>
+        </ul>
+      </li>
+      <li><a>Dolor</a></li>
+      <li><a>Amet</a></li>
+      <li class="-hasSubmenu">
+        <a>Another Sub-menu</a>
+        <ul>
+          <li><a>Bacon</a></li>
+          <li><a>Ipsum</a></li>
+          <li class="-hasSubmenu">
+            <a>Sub-sub-menu!</a>
+            <ul>
+              <li><a>Bacon</a></li>
+              <li><a>Ipsum</a></li>
+              <li><a>Dolor</a></li>
+              <li><a>Amet</a></li>
+            </ul>
+          </li>
+          <li><a>Dolor</a></li>
+          <li><a>Amet</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a><i class="icon-mi" style="transform: rotate(90deg);" x-desc="share">&#xe80d;</i></a></li>
+  <li class="-hasSubmenu -layChildrenRight">
+    <a><i class="icon-mi" x-desc="vertical-mobile">&#xe331;</i></a>
+    <ul class="-layChildrenRight">
+      <li><a>Ipsum</a></li>
+      <li class="-hasSubmenu">
+        <a><i class="icon-mi" x-desc="horizontal-mobile">&#xe32f;</i> Ågil10Om ÁÉÍÓÚÜÑ áéíóúüñ Çç€£</a>
+        <ul>
+          <li><a>Bacon</a></li>
+          <li><a>Ipsum</a></li>
+          <li><a>Dolor</a></li>
+          <li><a>Amet</a></li>
+        </ul>
+      </li>
+      <li><a><i class="icon-mi">&#xe331;</i> Amet</a></li>
+      <li><a>Tail pork loin chicken</a></li>
+      <li><a>Bacon ipsum dolor amet pork loin</a></li>
+    </ul>
+  </li>
+  <li><a>Delta</a></li>
+  <li><a>Epsilon</a></li>
+</ul>

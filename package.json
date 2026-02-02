@@ -1,0 +1,19 @@
+{
+  "name": "jr-www-lab-test",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "description": "jr legacy workshop",
+  "author": "JR <javier.rey.eu@gmail.com> (https://javierrey.github.io)",
+  "main": "index.html",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "ignore": {
+    "local_modules": {
+      "dependencies": {},
+      "devDependencies": {}
+    }
+  }
+}

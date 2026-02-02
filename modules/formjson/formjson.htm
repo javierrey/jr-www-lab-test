@@ -1,0 +1,26 @@
+<!-- formjson/formjson.htm -->
+<style>
+</style>
+<script>
+// /modules/formjson/formjson.js
+// require /modules/main/main.js
+/**
+ * FormJson module.
+ */
+(function () { "use strict";
+  self.aa = self.aa||{};
+  if (aa.FormJson && aa.FormJson.destroy) {aa.FormJson.destroy();}
+  var mod = aa.FormJson = {};
+  mod.ini = {};
+  aa.dat.merge(mod.ini, self.input);
+  mod.vars = {};
+
+  (function () {
+    var ins = {}; ins.container = ins.container||document.body;
+    ins.content = ins.container.querySelector("[x-id='form-json']");
+  })();
+})();
+
+</script>
+<div x-id="form-json" class="user-select-none" align="center">
+</div>

@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "uri": "/modules/main/data/main-texts-es.json",
+    "desc": [
+      "Main Spanish texts.",
+      "ÁÉÍÓÚÜÑÇáéíóúüñç"
+    ]
+  },
+  "thisLanguage": "Español",
+  "loading": "Cargando", "success": "Éxito", "error": "Error",
+  "ok": "Aceptar", "cancel": "Cancelar", "yes": "Sí", "no": "No", "confirm": "Confirmar", "select": "Seleccionar",
+  "home": "Inicio", "open": "Abrir", "close": "Cerrar", "next": "Siguiente", "back": "Anterior", "menu": "Menú", "options": "Opciones", "none": "Nada", "all": "Todo",
+  "sunday": "Domingo", "monday": "Lunes", "tuesday": "Martes", "wednesday": "Miércoles", "thursday": "Jueves", "friday": "Viernes", "saturday": "Sábado",
+  "january": "Enero", "february": "Febrero", "march": "Marzo", "april": "Abril", "may": "Mayo", "june": "Junio", "july": "Julio", "august": "Agosto", "september": "Septiembre", "october": "Octubre", "november": "Noviembre", "december": "Diciembre",
+  "zero": "Cero", "one": "Uno", "two": "Dos", "three": "Tres", "four": "Cuatro", "five": "Cinco", "six": "Seis", "seven": "Siete", "eight": "Ocho", "nine": "Nueve", "ten": "Diez", "eleven": "Once", "twelve": "Doce",
+  "first": "Primero", "second": "Segundo", "third": "Tercero", "fourth": "Cuarto", "fifth": "Quinto", "sixth": "Sexto", "seventh": "Séptimo", "eighth": "Octavo", "ninth": "Noveno", "tenth": "Décimo", "eleventh": "Undécimo", "twelfth": "Duodécimo",
+
+  "document_console": "Consola de Documento",
+
+  "zzz": "",
+
+  "main_menu": {
+    "hide_show_menu": "Ocultar/Mostrar Menú"
+  }
+}

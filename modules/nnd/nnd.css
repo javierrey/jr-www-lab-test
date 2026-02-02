@@ -1,0 +1,9 @@
+/* nnd/nnd.css */
+/**/
+[x-id='nn_content'] {
+  box-sizing: border-box;
+  background-color: transparent;
+}
+[x-id='nn_content'] *:not(.icon-mi):not(.icon-fa) {
+}
+/**/

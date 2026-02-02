@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "uri": "/modules/main/data/main-texts.json",
+    "desc": [
+      "Main English texts.",
+      "Ågil10Om €£"
+    ]
+  },
+  "thisLanguage": "English",
+  "loading": "Loading", "success": "Success", "error": "Error",
+  "ok": "OK", "cancel": "Cancel", "yes": "Yes", "no": "No", "confirm": "Confirm", "select": "Select",
+  "home": "Home", "open": "Open", "close": "Close", "next": "Next", "back": "Back", "menu": "Menu", "options": "Options", "none": "None", "all": "All",
+  "sunday": "Sunday", "monday": "Monday", "tuesday": "Tuesday", "wednesday": "Wednesday", "thursday": "Thursday", "friday": "Friday", "saturday": "Saturday",
+  "january": "January", "february": "February", "march": "March", "april": "April", "may": "May", "june": "June", "july": "July", "august": "August", "september": "September", "october": "October", "november": "November", "december": "December",
+  "zero": "Zero", "one": "One", "two": "Two", "three": "Three", "four": "Four", "five": "Five", "six": "Six", "seven": "Seven", "eight": "Eight", "nine": "Nine", "ten": "Ten", "eleven": "Eleven", "twelve": "Twelve",
+  "first": "First", "second": "Second", "third": "Third", "fourth": "Fourth", "fifth": "Fifth", "sixth": "Sixth", "seventh": "Seventh", "eighth": "Eighth", "ninth": "Ninth", "tenth": "Tenth", "eleventh": "Eleventh", "twelfth": "Twelfth",
+
+  "document_console": "Document Console",
+
+  "siteName": "Javier Rey",
+  "siteEmail": "javier.rey.eu@gmail.com",
+  "zzz": "",
+
+  "main_menu": {
+    "hide_show_menu": "Hide/Show Menu"
+  }
+}

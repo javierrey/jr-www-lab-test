@@ -1,0 +1,36 @@
+<form name="testForm" class="-form" align="center">
+<input type="hidden" name="hid0" value='({"hp0":{"hp00":5.4}})'/>
+<input type="hidden" name="hid1" value='([1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10])'/>
+<input type="text" name="txt0" value="A text line." style="width: 18em;"/>
+<input type="text" name="size" pattern="^\(?[-+]?(\d+|\d+\.\d+|\.\d+)([eE][-+]?\d+)?\)?$" value="(+1.036e+2)" style="text-align: right; width: 10em;"/><br/>
+<!--input type="number" name="size" value="1.073e+2" style="text-align: right; width: 10em;"/><br/-->
+<input type="file" name="fil0" multiple="multiple" accept="" value="" style="width: 32em;"/><br/>
+<input type="checkbox" name="chb0" value="chb0v" checked="checked"/>chb0t
+<input type="checkbox" name="chb1" value="chb1v"/>chb1t
+<input type="checkbox" name="chb2" value="chb2v" checked="checked"/>chb2t
+<input type="radio" name="rdb0" value="rdb0v0"/>rdb0t0
+<input type="radio" name="rdb0" value="rdb0v1" checked="checked"/>rdb0t1
+<input type="radio" name="rdb1" value="rdb1v0" checked="checked"/>rdb1t0
+<input type="radio" name="rdb1" value="rdb1v1"/>rdb1t1<br/>
+rng0<input type="range" name="rng0" min="0" max="1" value="1" style="width: 2.5em;"/>
+rng1<input type="range" name="rng1" min="0" max="1" step=".1" value="0.5" style="width: 7.5em;"/><br/>
+<select name="sel0">
+  <option value="sel0v0">sel0t0</option>
+  <option value="sel0v1">sel0t1</option>
+  <option value="sel0v2" selected="selected">sel0t2</option>
+  <option value="sel0v3">sel0t3</option>
+</select>
+<select multiple="multiple" name="sem0" style="height: 6em;">
+  <option value="sem0v0">sem0t0</option>
+  <option value="sem0v1" selected="selected">sem0t1</option>
+  <option value="sem0v2">sem0t2</option>
+  <option value="sem0v3" selected="selected">sem0t3</option>
+</select><br/>
+<button type="button" onclick="aa.app.loadXHR({url: '/test?p=1', post: 'txa0='+this.form.txa0.value.trim(), loaded: function (xhr) {console.log('test loaded', xhr.response);}});">Test</button>
+<button type="submit" onclick="">Submit</button><br/>
+<div class="textarea" style="width: 27em; height: 6em; margin: auto;">
+  <textarea name="txa0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" wrap="virtual">
+    ({"post0": "postVal0", post1: +7.508e+2, "post2": {"post2p0": "post2v0", "post2p1": +4.027e+2}})
+  </textarea>
+</div><br/>
+</form>

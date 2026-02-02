@@ -1,0 +1,105 @@
+/* /modules/main/styles/main-theme-light.css // v0.0 // javier.rey.eu@gmail.com // copyright 2017 */
+/**
+ */
+/* Base */
+:root {
+  --html-font: sans-serif;
+  --html-fsize: 14px;
+  --html-color-bg: #ffffff;
+  --html-color-bg1: #eeeeee;
+  --html-color-fg: #555555;
+  --html-color-disabled: #999999;
+  --html-color-info: #0088ff;
+  --html-color-success: #009900;
+  --html-color-warning: #ff8800;
+  --html-color-error: #ff0000;
+  --html-color-bg-i: #000000;
+  --html-color-bg1-i: #111111;
+  --html-color-fg-i: #ffffff;
+  --html-color-info-i: #00eeff;
+  --html-color-success-i: #22ff22;
+  --html-color-warning-i: #ffcc00;
+  --html-color-error-i: #ff7777;
+  --html-overflow-x: hidden;
+  --html-overflow-y: hidden;
+}
+/**/
+/* Fonts */
+@font-face {font-family: 'MaterialIcons'; src: url('../../../import/aa/media/materialicons.woff');}
+/**/
+/* Form */
+:root {
+  --form-font: sans-serif;
+  --form-type-font: monospace;
+  --form-border: solid 1px #777777;
+  --form-border-radius: 1.2em;
+  --form-color-border: #777777;
+  --form-color-top: #ffffff;
+  --form-color-bottom: #cccccc;
+  --form-color-left: #ffffff;
+  --form-color-right: #cccccc;
+  --form-color-middle-right: #eeeeee;
+  --form-color-middle: #dddddd;
+  --form-color-field: #ffffff;
+  --form-color-text: #555555;
+  --form-type-color-text: #555555;
+  --form-color-disabled: #999999;
+}
+.-ignore-:root {
+  --form-font: sans-serif;
+  --form-type-font: monospace;
+  --form-border: solid 1px #777777;
+  --form-border-radius: 1.2em;
+  --form-color-border: #777777;
+  --form-color-top: #2ea7b1;
+  --form-color-bottom: #2ea7b1;
+  --form-color-left: #0088ff;
+  --form-color-right: #bbbbbb;
+  --form-color-middle-right: #99aacc;
+  --form-color-middle: #7799ee;
+  --form-color-field: #4f5a6a;
+  --form-color-text: #ffffff;
+  --form-type-color-text: #ffffff;
+  --form-color-disabled: #999999;
+}
+/**/
+/* Menu */
+:root {
+  --menu-font: sans-serif;
+  --menu-border-radius: 0.75em;
+  --menu-min-width: 12em;
+  --menu-max-section-width: 18em;
+  --menu-color-bg: rgba(0,0,0,0.9);
+  --menu-color-fg: #ffffff;
+  --menu-color-highlight: rgba(128,128,128,0.3);
+  --menu-color-disabled: #aaaaaa;
+  --menu-color-shadow: rgba(128,128,128,0.3);
+}
+/**/
+/* Implementation */
+.lay-head, .lay-foot {
+  background-color: #000000;
+}
+.lay-head, .lay-foot * {
+  color: #ffffff;
+}
+.lay-body {
+  background-color: var(--html-color-bg1);
+}
+.-menu>li>a, .-menu>.-hasSubmenu>a:after {
+  color: #ffffff;
+  border-color: #ffffff !important;
+}
+.box-shadow, [x-id='nn_content'] canvas, .lay-head, .lay-foot {
+  box-shadow: 0 0 0 1px var(--menu-color-shadow), 0 3px 1px 0 var(--menu-color-shadow), 0 6px 12px 0 var(--menu-color-shadow);
+}
+[x-id='mainLogo0'] {fill: var(--menu-color-fg); opacity: 0.3;}
+[x-id='mainLogo0']:hover {opacity: 1; border: solid 0px #eeeeee;}
+
+/* :root */ [x-id='nn_content'] .html-color-fg {color: var(--html-color-fg);}
+/* :root */ [x-id='nn_content'] .html-color-info {color: var(--html-color-info);}
+/* :root */ [x-id='nn_content'] .html-color-success {color: var(--html-color-success);}
+/* :root */ [x-id='nn_content'] .html-color-warning {color: var(--html-color-warning);}
+/* :root */ [x-id='nn_content'] .html-color-error {color: var(--html-color-error);}
+
+/**/
