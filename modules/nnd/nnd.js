@@ -113,7 +113,7 @@
   nn.view.padWidth = 10*nn.view.unit;
   nn.view.padHeight = 4.2*nn.view.unit;
 
-  nn.view.topDown = 1; // 1, -1
+  nn.view.topDown = -1; // -1, 1
   nn.view.maxCanvasCols = 9; // Excluding bias. 8, 9
   nn.view.maxCanvasRows = 5; // Excluding input and output. 4, 5
   nn.view.canvasOffsetCol = 0;
@@ -163,9 +163,8 @@
     if (nrn.isBias) {nrn.minValue = Math.min(nwk.minInputValue, -1); nrn.maxValue = Math.max(nwk.maxInputValue, 1);
     } else if (!nrn.row) {nrn.minValue = nwk.minInputValue; nrn.maxValue = nwk.maxInputValue;
     } else {nrn.minValue = nwk.minOutputValue; nrn.maxValue = nwk.maxOutputValue;}
-    nrn.midValue = (nrn.minValue+nrn.maxValue)/2;
+    nrn.sum ||= 0; nrn.midValue = (nrn.minValue+nrn.maxValue)/2;
     nrn.valueRange = Math.abs(nrn.maxValue-nrn.minValue);
-    nrn.sum = nrn.sum||0;
     if (nrn.value == null) {nrn.value = nrn.isBias ? 0 : nrn.midValue;}
     if (nrn.value > nrn.maxValue) {nrn.value = nrn.maxValue;
     } else if (nrn.value < nrn.minValue) {nrn.value = nrn.minValue;}
@@ -179,11 +178,11 @@
   };
 
   nn.neuron_getParents = function (nrn, nwk) {
-    return nrn.parents || ((!nrn.row || nrn.isBias) ? [] : (nwk||nn.neuron_getNetwork(nrn)).layers[nrn.row-1]);
+    return nrn.parents || ((!nrn.row || nrn.isBias) ? [] : (nwk??nn.neuron_getNetwork(nrn)).layers[nrn.row-1]);
   };
 
   nn.neuron_getChildren = function (nrn, nwk) {
-    nwk = nwk||nn.neuron_getNetwork(nrn);
+    nwk ??= nn.neuron_getNetwork(nrn);
     var children = [], last = nwk.layers.length-1;
     if (nrn.row < last) {
       children = nwk.layers[nrn.row+1];
@@ -200,7 +199,7 @@
   };
 
   nn.neuron_setTargets = function (nrn, targets) {
-    nrn.targets = targets||nrn.targets||[];
+    nrn.targets = targets??nrn.targets??[];
     for (var i = 0; i < nrn.targets.length; i++) {
       if (nrn.targets[i] < nrn.minValue) {nrn.targets[i] = nrn.minValue;
       } else if (nrn.targets[i] > nrn.maxValue) {nrn.targets[i] = nrn.maxValue;}
@@ -215,7 +214,7 @@
   };
 
   nn.neuron_setWeights = function (nrn, weights, scale) { // weights: null (neuron), [] (random), FIXED (seed).
-    weights = weights||nrn.weights||nn.vars.FIXED; scale = scale||1;
+    weights ||= nrn.weights||nn.vars.FIXED; scale ||= 1;
     var fixed = (weights == nn.vars.FIXED), length = nn.vars.WEIGHTS_SEED.length, index = nn.neuron_getIndex(nrn);
     weights = (fixed ? nn.vars.WEIGHTS_SEED : weights).slice(0);
     var pos = index%length; while (fixed && pos--) {weights.push(weights.shift());}
@@ -377,7 +376,7 @@
   };
 
   nn.Network = function (nwk) {
-    nwk = nwk||{};
+    nwk ??= {};
     if (nwk.constructor == String) {
       nwk = nwk.trim();
       if (nwk.charAt(0) == '{' || nwk.charAt(0) == '[') {
@@ -435,7 +434,7 @@
   };
 
   nn.network_setActivation = function (nwk, method, iv, ov, rx) {
-    iv ||= {}; ov ||= {}; rx ||= {};
+    iv ??= {}; ov ??= {}; rx ??= {};
     var aV = nn.vars.actVals; method ||= nwk.activationMethod; if (!nn[aV.ACT+method]) {method = aV.SIGMOID;}
     nwk.activationMethod = method; nwk.activation = nn[aV.ACT+method]; nwk.activationPrime = nn[aV.ACT+method+aV.PRIME]; // Centered/Positive:
     if (method == aV.TANGENT || method == aV.LINEAR) {aG.w = 1; aG.h = 1; aG.x = 0; aG.y = 0;} else {aG.w = 1; aG.h = .5; aG.x = 0; aG.y = .5;}
@@ -1077,8 +1076,7 @@
   };
 
   nn.updateNetwork = function (nwk) {
-    var v; nn.net = nwk ??= nn.net; if (!nwk) {return;}
-    nn.view.topDown = nn.view.topDown||1;
+    var v; nn.net = nwk ??= nn.net; nn.view.topDown ??= 1; if (!nwk) {return;}
     nn.activationGraph = Number(fE.activation_graph.value);
     fE.activation_graph_label.innerHTML = nn.activationGraph ? nn.vars.actVals.PRIME : nn.vars.actVals.ACTIVATION;
     nn.autoExport = Number(fE.auto_export.value);
@@ -1236,7 +1234,7 @@
 
   nn.setActivation = function (nwk, method, iv, ov, rx) {
     nwk ??= nn.net; if (!nwk) {return;}
-    var i, av = nn.vars.actVals; iv = iv||{}; ov = ov||{}; rx = rx||{};
+    var i, av = nn.vars.actVals; iv ??= {}; ov ??= {}; rx ??= {};
     var origMethod = nwk.activationMethod||'', origLIV = nwk.minInputValue, origRIV = nwk.maxInputValue;
     if (method == -1) {
       var name = -1, names = [av.SIGMOID, av.TANGENT, av.PARABOLIC, av.LINEAR];
@@ -1383,7 +1381,7 @@
   };
 
   nn.loadWorker = function (inp, fun) {
-    var url; inp = inp||{}; if (inp.constructor != Object) {inp = {url: inp};}
+    var url; inp ??= {}; if (inp.constructor != Object) {inp = {url: inp};}
     if (!inp.url && typeof URL != 'undefined' && typeof Blob != 'undefined') {
       url = new Blob(['self.onmessage = '+function (ev) {
         var msg = ''+ev.data;
@@ -1423,16 +1421,16 @@
     if (nn.worker && nn.worker.terminate) {nn.worker.terminate();}
     if (on < 0) {return;}
     nn.worker = nn.loadWorker(null, function (wk) {
-      var output = wk.output||wk.error||{};
+      var output = wk.output??wk.error??{};
       if (output.action == 'train') {
         if (nn.net.training <= 0 && output.net.training > 0) {output.net.training = -2;}
         nn.setNetwork(output.net, 1);
       }
     });
     nn.worker.postMessage('(function (inp) { "use strict";'
-      +'\n  inp = inp||{}; inp.basePath = inp.basePath||"";'
+      +'\n  inp ||= {}; inp.basePath ??= "";'
       +'\n  self.input = inp; self.output = {};'
-      +'\n  self.aa = self.aa||{}; self.nn = aa.nn = aa.nn||{};'
+      +'\n  self.aa ??= {}; self.nn = aa.nn ??= {};'
       +'\n  nn.vars = '+JSON.stringify(nn.vars)+';'
       +'\n  const aG = nn.vars.actGeom;'
       +'\n  nn.actSigmoid = '+nn.actSigmoid+';'
@@ -1456,7 +1454,7 @@
       +'\n  nn.network_export = '+nn.network_export+';'
       +'\n  nn.Network = '+nn.Network+';'
       +'\n  self.run = '+function (params) {
-        params = params||{}; self.output.action = params.action;
+        params ??= {}; self.output.action = params.action;
         if (params.action == 'train') {
           if (nn.net && nn.net.training > 0) {nn.network_train(nn.net);}
           self.output.net = nn.network_export(nn.net);
@@ -1492,7 +1490,7 @@
       for (i in nn.form.el) {el = nn.form.el[i]; if (el.tagName) {el.onclick = el.onchange = el.oninput = null;}}
     }
     if (on < 0) {return;}
-    nn.form = nn.container.querySelector('[x-id="nn_form_content"]')||document;
+    nn.form = nn.container.querySelector('[x-id="nn_form_content"]')??document;
     fE = nn.form.el = {};
     var eventListener = function (ev) {
       var tgt = ev.target, num = Number(tgt.value); if (ev.type == 'input') {tgt.onchange = null;}
@@ -1550,89 +1548,89 @@
       }
       if (tgt == fE.activation_method) {nn.setActivation(null, tgt.value);}
     };
-    el = fE.network_name = nn.form.querySelector('[x-id="network_name"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.selected_target = nn.form.querySelector('[x-id="selected_target"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.selected_neuron = nn.form.querySelector('[x-id="selected_neuron"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.selected_neuron_pin = nn.form.querySelector('[x-id="selected_neuron_pin"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.learning_rate = nn.form.querySelector('[x-id="learning_rate"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.learning_match = nn.form.querySelector('[x-id="learning_match"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.learning_match_lower = nn.form.querySelector('[x-id="learning_match_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.learning_calc = nn.form.querySelector('[x-id="learning_calc"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.learning_rate_higher = nn.form.querySelector('[x-id="learning_rate_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.format_net = nn.form.querySelector('[x-id="format_net"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.training_period = nn.form.querySelector('[x-id="training_period"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.shuffle_data = nn.form.querySelector('[x-id="shuffle_data"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.adapt_neurons = nn.form.querySelector('[x-id="adapt_neurons"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.adapt_rate = nn.form.querySelector('[x-id="adapt_rate"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.col_offset = nn.form.querySelector('[x-id="col_offset"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.row_offset = nn.form.querySelector('[x-id="row_offset"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.min_input_value = nn.form.querySelector('[x-id="min_input_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.max_input_value = nn.form.querySelector('[x-id="max_input_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.min_output_value = nn.form.querySelector('[x-id="min_output_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.max_output_value = nn.form.querySelector('[x-id="max_output_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.min_domain_value = nn.form.querySelector('[x-id="min_domain_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.max_domain_value = nn.form.querySelector('[x-id="max_domain_value"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.bias_neurons = nn.form.querySelector('[x-id="bias_neurons"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.freeze_bias = nn.form.querySelector('[x-id="freeze_bias"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.hidden_layers = nn.form.querySelector('[x-id="hidden_layers"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.hidden_layers_lower = nn.form.querySelector('[x-id="hidden_layers_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.hidden_layers_higher = nn.form.querySelector('[x-id="hidden_layers_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.hidden_neurons = nn.form.querySelector('[x-id="hidden_neurons"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.hidden_neurons_lower = nn.form.querySelector('[x-id="hidden_neurons_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.hidden_neurons_higher = nn.form.querySelector('[x-id="hidden_neurons_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.input_neurons = nn.form.querySelector('[x-id="input_neurons"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.input_neurons_lower = nn.form.querySelector('[x-id="input_neurons_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.input_neurons_higher = nn.form.querySelector('[x-id="input_neurons_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.output_neurons = nn.form.querySelector('[x-id="output_neurons"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.output_neurons_lower = nn.form.querySelector('[x-id="output_neurons_lower"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.output_neurons_higher = nn.form.querySelector('[x-id="output_neurons_higher"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.activation_graph = nn.form.querySelector('[x-id="activation_graph"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.auto_export = nn.form.querySelector('[x-id="auto_export"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.enable_beep = nn.form.querySelector('[x-id="enable_beep"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.extend_stats = nn.form.querySelector('[x-id="extend_stats"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.layers_only = nn.form.querySelector('[x-id="layers_only"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.targets_only = nn.form.querySelector('[x-id="targets_only"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.long_values = nn.form.querySelector('[x-id="long_values"]')||{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.samples_data = nn.form.querySelector('[x-id="samples_data"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.activation_method = nn.form.querySelector('[x-id="activation_method"]')||{}; if (el.tagName) {el.onchange = eventListener;}
-    el = fE.import_net = nn.form.querySelector('[x-id="import_net"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.export_net = nn.form.querySelector('[x-id="export_net"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.clear_data = nn.form.querySelector('[x-id="clear_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.delete_data = nn.form.querySelector('[x-id="delete_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.save_data = nn.form.querySelector('[x-id="save_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.prev_data = nn.form.querySelector('[x-id="prev_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.next_data = nn.form.querySelector('[x-id="next_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.new_data = nn.form.querySelector('[x-id="new_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.random_weights = nn.form.querySelector('[x-id="random_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.fixed_weights = nn.form.querySelector('[x-id="fixed_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.lose_weights = nn.form.querySelector('[x-id="lose_weights"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.train_data = nn.form.querySelector('[x-id="train_data"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.bottom_up = nn.form.querySelector('[x-id="bottom_up"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.canvas_hide = nn.form.querySelector('[x-id="canvas_hide"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.canvas_theme = nn.form.querySelector('[x-id="canvas_theme"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    el = fE.collapse_layers = nn.form.querySelector('[x-id="collapse_layers"]')||{}; if (el.tagName) {el.onclick = eventListener;}
-    fE.data_stats = nn.form.querySelector('[x-id="data_stats"]')||{};
-    fE.data_error = nn.form.querySelector('[x-id="data_error"]')||{};
-    fE.data_sets = nn.form.querySelector('[x-id="data_sets"]')||{};
-    fE.net_json = nn.form.querySelector('[x-id="net_json"]')||{};
-    fE.selected_neuron_label = nn.form.querySelector('[x-id="selected_neuron_label"]')||{};
-    fE.col_offset_label = nn.form.querySelector('[x-id="col_offset_label"]')||{};
-    fE.max_col_offset_label = nn.form.querySelector('[x-id="max_col_offset_label"]')||{};
-    fE.row_offset_label = nn.form.querySelector('[x-id="row_offset_label"]')||{};
-    fE.max_row_offset_label = nn.form.querySelector('[x-id="max_row_offset_label"]')||{};
-    fE.activation_graph_label = nn.form.querySelector('[x-id="activation_graph_label"]')||{};
-    fE.training_period_label = nn.form.querySelector('[x-id="training_period_label"]')||{};
-    fE.bias_neurons_label = nn.form.querySelector('[x-id="bias_neurons_label"]')||{};
-    fE.dataset_label = nn.form.querySelector('[x-id="dataset_label"]')||{};
-    fE.datasets_label = nn.form.querySelector('[x-id="datasets_label"]')||{};
-    fE.data_diff_label = nn.form.querySelector('[x-id="data_diff_label"]')||{};
-    fE.value_diff_label = nn.form.querySelector('[x-id="value_diff_label"]')||{};
-    fE.min_input_value_label = nn.form.querySelector('[x-id="min_input_value_label"]')||{};
-    fE.max_input_value_label = nn.form.querySelector('[x-id="max_input_value_label"]')||{};
-    fE.min_output_value_label = nn.form.querySelector('[x-id="min_output_value_label"]')||{};
-    fE.max_output_value_label = nn.form.querySelector('[x-id="max_output_value_label"]')||{};
-    fE.min_domain_value_label = nn.form.querySelector('[x-id="min_domain_value_label"]')||{};
-    fE.max_domain_value_label = nn.form.querySelector('[x-id="max_domain_value_label"]')||{};
+    el = fE.network_name = nn.form.querySelector('[x-id="network_name"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.selected_target = nn.form.querySelector('[x-id="selected_target"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.selected_neuron = nn.form.querySelector('[x-id="selected_neuron"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.selected_neuron_pin = nn.form.querySelector('[x-id="selected_neuron_pin"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.learning_rate = nn.form.querySelector('[x-id="learning_rate"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.learning_match = nn.form.querySelector('[x-id="learning_match"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.learning_match_lower = nn.form.querySelector('[x-id="learning_match_lower"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.learning_calc = nn.form.querySelector('[x-id="learning_calc"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.learning_rate_higher = nn.form.querySelector('[x-id="learning_rate_higher"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.format_net = nn.form.querySelector('[x-id="format_net"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.training_period = nn.form.querySelector('[x-id="training_period"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.shuffle_data = nn.form.querySelector('[x-id="shuffle_data"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.adapt_neurons = nn.form.querySelector('[x-id="adapt_neurons"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.adapt_rate = nn.form.querySelector('[x-id="adapt_rate"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.col_offset = nn.form.querySelector('[x-id="col_offset"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.row_offset = nn.form.querySelector('[x-id="row_offset"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.min_input_value = nn.form.querySelector('[x-id="min_input_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.max_input_value = nn.form.querySelector('[x-id="max_input_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.min_output_value = nn.form.querySelector('[x-id="min_output_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.max_output_value = nn.form.querySelector('[x-id="max_output_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.min_domain_value = nn.form.querySelector('[x-id="min_domain_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.max_domain_value = nn.form.querySelector('[x-id="max_domain_value"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.bias_neurons = nn.form.querySelector('[x-id="bias_neurons"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.freeze_bias = nn.form.querySelector('[x-id="freeze_bias"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.hidden_layers = nn.form.querySelector('[x-id="hidden_layers"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.hidden_layers_lower = nn.form.querySelector('[x-id="hidden_layers_lower"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.hidden_layers_higher = nn.form.querySelector('[x-id="hidden_layers_higher"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.hidden_neurons = nn.form.querySelector('[x-id="hidden_neurons"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.hidden_neurons_lower = nn.form.querySelector('[x-id="hidden_neurons_lower"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.hidden_neurons_higher = nn.form.querySelector('[x-id="hidden_neurons_higher"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.input_neurons = nn.form.querySelector('[x-id="input_neurons"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.input_neurons_lower = nn.form.querySelector('[x-id="input_neurons_lower"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.input_neurons_higher = nn.form.querySelector('[x-id="input_neurons_higher"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.output_neurons = nn.form.querySelector('[x-id="output_neurons"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.output_neurons_lower = nn.form.querySelector('[x-id="output_neurons_lower"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.output_neurons_higher = nn.form.querySelector('[x-id="output_neurons_higher"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.activation_graph = nn.form.querySelector('[x-id="activation_graph"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.auto_export = nn.form.querySelector('[x-id="auto_export"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.enable_beep = nn.form.querySelector('[x-id="enable_beep"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.extend_stats = nn.form.querySelector('[x-id="extend_stats"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.layers_only = nn.form.querySelector('[x-id="layers_only"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.targets_only = nn.form.querySelector('[x-id="targets_only"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.long_values = nn.form.querySelector('[x-id="long_values"]')??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.samples_data = nn.form.querySelector('[x-id="samples_data"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.activation_method = nn.form.querySelector('[x-id="activation_method"]')??{}; if (el.tagName) {el.onchange = eventListener;}
+    el = fE.import_net = nn.form.querySelector('[x-id="import_net"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.export_net = nn.form.querySelector('[x-id="export_net"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.clear_data = nn.form.querySelector('[x-id="clear_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.delete_data = nn.form.querySelector('[x-id="delete_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.save_data = nn.form.querySelector('[x-id="save_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.prev_data = nn.form.querySelector('[x-id="prev_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.next_data = nn.form.querySelector('[x-id="next_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.new_data = nn.form.querySelector('[x-id="new_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.random_weights = nn.form.querySelector('[x-id="random_weights"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.fixed_weights = nn.form.querySelector('[x-id="fixed_weights"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.lose_weights = nn.form.querySelector('[x-id="lose_weights"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.train_data = nn.form.querySelector('[x-id="train_data"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.bottom_up = nn.form.querySelector('[x-id="bottom_up"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.canvas_hide = nn.form.querySelector('[x-id="canvas_hide"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.canvas_theme = nn.form.querySelector('[x-id="canvas_theme"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    el = fE.collapse_layers = nn.form.querySelector('[x-id="collapse_layers"]')??{}; if (el.tagName) {el.onclick = eventListener;}
+    fE.data_stats = nn.form.querySelector('[x-id="data_stats"]')??{};
+    fE.data_error = nn.form.querySelector('[x-id="data_error"]')??{};
+    fE.data_sets = nn.form.querySelector('[x-id="data_sets"]')??{};
+    fE.net_json = nn.form.querySelector('[x-id="net_json"]')??{};
+    fE.selected_neuron_label = nn.form.querySelector('[x-id="selected_neuron_label"]')??{};
+    fE.col_offset_label = nn.form.querySelector('[x-id="col_offset_label"]')??{};
+    fE.max_col_offset_label = nn.form.querySelector('[x-id="max_col_offset_label"]')??{};
+    fE.row_offset_label = nn.form.querySelector('[x-id="row_offset_label"]')??{};
+    fE.max_row_offset_label = nn.form.querySelector('[x-id="max_row_offset_label"]')??{};
+    fE.activation_graph_label = nn.form.querySelector('[x-id="activation_graph_label"]')??{};
+    fE.training_period_label = nn.form.querySelector('[x-id="training_period_label"]')??{};
+    fE.bias_neurons_label = nn.form.querySelector('[x-id="bias_neurons_label"]')??{};
+    fE.dataset_label = nn.form.querySelector('[x-id="dataset_label"]')??{};
+    fE.datasets_label = nn.form.querySelector('[x-id="datasets_label"]')??{};
+    fE.data_diff_label = nn.form.querySelector('[x-id="data_diff_label"]')??{};
+    fE.value_diff_label = nn.form.querySelector('[x-id="value_diff_label"]')??{};
+    fE.min_input_value_label = nn.form.querySelector('[x-id="min_input_value_label"]')??{};
+    fE.max_input_value_label = nn.form.querySelector('[x-id="max_input_value_label"]')??{};
+    fE.min_output_value_label = nn.form.querySelector('[x-id="min_output_value_label"]')??{};
+    fE.max_output_value_label = nn.form.querySelector('[x-id="max_output_value_label"]')??{};
+    fE.min_domain_value_label = nn.form.querySelector('[x-id="min_domain_value_label"]')??{};
+    fE.max_domain_value_label = nn.form.querySelector('[x-id="max_domain_value_label"]')??{};
   };
 
   nn.setPointerXY = function (pointer, ev, local) {
@@ -1679,8 +1677,7 @@
   nn.onkeyup = function (ev) {};
 
   nn.setIntervalMethod = function (target, methodName, time) {
-    target = target||this;
-    var intervalId = methodName+'_interval', vars = target.vars||target;
+    target ??= this; var intervalId = methodName+'_interval', vars = target.vars??target;
     clearInterval(vars[intervalId]||0);
     if (time > 0 && typeof target[methodName] == 'function') {vars[intervalId] = setInterval(target[methodName], time);}
     return vars[intervalId];
@@ -1689,7 +1686,7 @@
   nn.setEventListener = function (target, type, listener, options, add) {
     target.removeEventListener(type, listener, false);
     target.removeEventListener(type, listener, true);
-    if (!add || add > 0) {target.addEventListener(type, listener, options||false);}
+    if (!add || add > 0) {target.addEventListener(type, listener, options??false);}
   };
 
   nn.setEvents = function (on) {
@@ -1722,9 +1719,9 @@
   };
 
   (function ready() {
-    nn.content = (nn.ini.container||document).querySelector('[x-id="nn_content"]');
-    if (!nn.content || !nn.content.querySelector('[x-id="nn_canvas_container"]')) return setTimeout(ready, nn.vars.ms.LISTEN);
-    var i; nn.ini.container = nn.ini.container||nn.content.parentNode||document.body;
+    nn.content = (nn.ini.container??document).querySelector('[x-id="nn_content"]');
+    if (!nn.content?.querySelector('[x-id="nn_canvas_container"]')) return setTimeout(ready, nn.vars.ms.LISTEN);
+    var i; nn.ini.container = nn.ini.container??nn.content.parentNode??document.body;
     for (i in nn.ini) {if (i in nn) {nn[i] = nn.ini[i];}}
     i = ''+nn.ini.theme; i = (i.indexOf('light') != -1 && i.indexOf('dark') == -1) ? 'light' : null;
     nn.setForm(1);
