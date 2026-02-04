@@ -62,6 +62,8 @@ The derivative of the cost function is the slope tangent, which is negative on t
 
 <img src="./assets/nnd-doc-6.jpg" alt="Cost function and derivative slope" style="width: 360px;"/>
 
+The change ratio applied to the next calculation is called the `learning rate`, and it should be small enough to allow smooth transitions from one result to the other.
+
 In most cases, even simple ones, the neural network will need intermediate layers of neurons, the `hidden layers`, so the network is flexible enough to travel to the desired state, where weights will be increased, making the network more rigid, but closer to the expected output.
 
 If the network is not well designed for the purpose of the use case, it may never converge into a consistent result, or it may even diverge.
