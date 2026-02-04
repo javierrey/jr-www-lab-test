@@ -20,9 +20,9 @@ We can write a table with the measures of the boxes we have and their fitting re
 
 <img src="./assets/nnd-doc-2.jpg" alt="Table of box measures and fitting test" style="width: 800px;"/>
 
-We can also draw a diagram of widths and heights with the distribution of the valid and invalid samples.
-
 In metres, so the values are directly suitable for a network input (between 0 and 1), otherwise a mapping function would be required.
+
+We can also draw a diagram of widths and heights with the distribution of the valid and invalid samples.
 
 <img src="./assets/nnd-doc-3.jpg" alt="Sample distribution diagram" style="width: 480px;"/>
 
