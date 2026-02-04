@@ -28,7 +28,7 @@ We can also draw a diagram of widths and heights with the distribution of the va
 
 The goal of our neural network is to predict if new given boxes will be valid or not, so in the distribution diagram they will fall in the area of valid boxes, or in the area of invalid boxes.
 
-In this case, the border that separates both areas seems to be more or less a straight line, so the neural network (a.k.a. perceptron) that makes predictions should not need to be too large.
+In this case, the border that separates both areas seems to be more or less a straight line, so the neural network that makes the predictions should not need to be too large.
 
 ## The neural network
 
