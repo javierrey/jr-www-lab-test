@@ -1,6 +1,7 @@
 <!-- nnd/nnd.htm -->
 <link type="text/css" rel="stylesheet" href="./modules/nnd/nnd.css"/>
 <script src="./modules/nnd/nnd.js"></script>
+
 <div x-id="nn_content" class="user-select-none" align="center">
 <div x-id="nn_title" align="center">
   <!--a class="cursor-pointer vertical-align-sup" onclick=""><i class="icon-mi font-size-1-4" x-desc="info">&#xe88e;</i></a-->
@@ -43,8 +44,8 @@
           <br/>
           Bias <input type="range" x-id="bias_neurons" value="1" min="0" max="1" style="width: 2.5em;"/>
           [<span x-id="bias_neurons_label"></span>]
-          <span style="display: none;">
-            &nbsp; freeze <input type="range" x-id="freeze_bias" value="0" min="0" max="1" style="width: 2.5em;"/>
+          <span style="display: inline;"><!-- Display none, inline -->
+            &nbsp; Static <input type="range" x-id="static_bias" value="0" min="0" max="1" style="width: 2.5em;"/>
           </span>
           <br/>
         </div>
@@ -71,7 +72,7 @@
             <input type="range" x-id="max_input_value" value="1" min="0" max="1" style="width: 2.5em; display: none;"/>
             <br/>
           </span>
-          <span style="display: block;"><!-- Display none, block -->
+          <span style="display: none;"><!-- Display none, block -->
             Domain
             <input type="range" x-id="min_domain_value" value="-1" min="-1" max="0" style="width: 2.5em;"/>
             [<span x-id="min_domain_value_label"></span>, <span x-id="max_domain_value_label"></span>]
@@ -81,7 +82,9 @@
           </div>
         <div>
           Weights:
-          <button type="button" x-id="fixed_weights">Fix</button>
+          <span style="display: none;"><!-- Display none, inline -->
+            <button type="button" x-id="fixed_weights">Fix</button>
+          </span>
           <button type="button" x-id="random_weights">Random</button>
           <button type="button" x-id="lose_weights">Lose</button>
           <br/>
