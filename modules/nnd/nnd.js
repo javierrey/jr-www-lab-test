@@ -40,8 +40,8 @@
 
   /** Ported from view.js. */
   const ge = (id) => document.getElementById(id);
-  const qs = (sel, el = document) => el.querySelector(sel);
-  const qa = (sel, el = document) => el.querySelectorAll(sel);
+  const qs = (sel, el = document) => el?.querySelector?.(sel);
+  const qa = (sel, el = document) => el?.querySelectorAll?.(sel);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,8 +65,8 @@
 
   nn.vars.beep = new Audio('data:audio/wav;base64,UklGRkkDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSUDAACaiGOgVm+pbYOahVSfbGmeeoeFj16ZaWqnbYGViliiZXGfaYiafl2pV3mdbYGefWGkUYeWb4abcmilU4mPc4acbnGdU5GLcoedZnyYUpiIcoueXoiMU6J/do+YV5OCWal2dpaPVaJxZqdufZaGWKZlc6Juf5h8X6ZfgJxsfpxzaaZYhZdtgZ1sb6RTj5NqhZdybqNSjZNoi5N4Z6RSiZdojJZvbaVIlo9njpdodp5Gnohsi5xgfZxHooBxjZlbiI9NqHdyjZdckYZRqHN2kJZZlX5YqG95k5BZnnBipm19lolZpmJwoml/m39grFOBmmmFnHlmpk6KlW6InGpwoU6Tj26KnmN6mU+ajG+Mml6ElFGignCNlmWBl0uig3GOlWp4nUuigm+RlWSElUeqeHOUlV2NiUytdHaSmFeUgVGtb3uVkVaccluua3+UjFeibGSpaIGViFqkYm6nZ4SXf1+oWXqgZoWbdmanT4qWZ4ida3OiR5mKbI2bY3ycSp6FbY2cXIiQTqWAbpCWWZOGU6Z7cZSSWJl/WKpyeJOSXZOCU69xe5CSX42JUrFvepOQW5l7VrZof5aMVqJxX7JpgJWMVKdoa61mhJeDWatcd6hmhZWBXqxXfqBliJd9Y6pRh5pniJp2a6ZLkJFrjJtrdp5Hnoduj5pfhpJIqXtzj5Zbj4hQqHZ2kpNXmXxZqHN4lY1XnnFhqnF4l4VZpGtpqWl/kolboW1krWWDj45cnXBhrmSElYlap2BqrV+Kl4JZqld2p2OHmn5brE+CoWSLmXVlq0qNmGaMmnFpp0mWkWeMmW5ypEaaimuQmWZ7mkijgm6PmV+KkEqpdnKUlliYe1OtbnqUkVWfcVyqbHuYiliiZWiobH6ZgFulXnGlaYGbeV6lV3yiZIaTfl6mWXekYYmOhVqnW3WmYIqTfF+tTIOeXo+XdmOsRoyWZYyacGioQ5eOZo6ZaHSiQZ+Ha4+YY3qdQ6SBbo2ZYoKTRql7cpGVXI2JTqxydZSVWJp3Vq9sfZeLVaZoZ6tngpiGWKpecqdngpp+X6pWfaFohZx1ZqdShpxoh5tu');
 
-  nn.vars.AND_OR_XOR = JSON.stringify({name:'AND_OR_XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,staticBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1]}],[{targets:[1,0,0,0]},{targets:[1,0,1,1]},{targets:[0,0,1,1]}]]});
-  nn.vars.BOXES_CONTAINER = JSON.stringify({name:'BOXES_CONTAINER',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,staticBias:0,training:0,convergence:0,layers:[[{targets:[0.6,0.4,0.6,0.3,0.7,0.35,0.45,0.1,0.95]},{targets:[0.4,0.6,0.9,0.5,0.35,0.85,0.75,0.45,0.2]},{targets:[1,1,1,1,1,1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1,1,1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1,1,1,1,1,1]}],[{targets:[1,1,0,1,1,0,0,1,0]}]]});
+  nn.vars.AND_OR_XOR = JSON.stringify({name:'AND_OR_XOR',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,dynamicBias:0,training:0,convergence:0,layers:[[{targets:[1,0,0,1]},{targets:[1,0,1,0]},{targets:[1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1]}],[{targets:[1,0,0,0]},{targets:[1,0,1,1]},{targets:[0,0,1,1]}]]});
+  nn.vars.BOXES_CONTAINER = JSON.stringify({name:'BOXES_CONTAINER',learningRate:0.4,learningMatch:0.004,activationMethod:'Sigmoid',minInputValue:0,maxInputValue:1,minOutputValue:0,maxOutputValue:1,minDomainValue:-1,maxDomainValue:1,bias:1,dynamicBias:0,training:0,convergence:0,layers:[[{targets:[0.6,0.4,0.6,0.3,0.7,0.35,0.45,0.1,0.95]},{targets:[0.4,0.6,0.9,0.5,0.35,0.85,0.75,0.45,0.2]},{targets:[1,1,1,1,1,1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1,1,1,1,1,1]}],[{},{},{},{},{targets:[1,1,1,1,1,1,1,1,1]}],[{targets:[1,1,0,1,1,0,0,1,0]}]]});
 
   nn.container = null;
   nn.content = null;
@@ -138,7 +138,7 @@
   nn.vars.roundVal = 3;
   nn.vars.roundZero = .5/Math.pow(10, nn.vars.roundVal);
 
-  nn.vars.FIXED = 'fixed';
+  nn.vars.RESET = 'reset';
   nn.vars.WEIGHTS_SEED = [.513, .984, -.271, -.596, -.142, .542, -.216, .027, -.799, .434, -.281];
 
   nn.vars.actVals = {ACT: "act", ACTIVATION: "Activation", PRIME: "Prime", SIGMOID: "Sigmoid", TANGENT: "Tangent", PARABOLIC: "Parabolic", LINEAR: "Linear"};
@@ -190,7 +190,7 @@
     if (nrn.row < last) {
       children = nwk.layers[nrn.row+1];
       if (nwk.bias && nrn.row < last-1) {
-        children = children.slice(0); children.pop();
+        children = children.slice(); children.pop();
       }
     }
     return children;
@@ -216,13 +216,13 @@
     if (nrn.parent.targetsLength < nrn.targets.length) {nrn.targets.splice(nrn.parent.targetsLength, nrn.targets.length-nrn.parent.targetsLength);}
   };
 
-  nn.neuron_setWeights = function (nrn, weights, scale) { // weights: null (neuron), [] (random), FIXED (seed).
-    weights ||= nrn.weights||nn.vars.FIXED; scale ||= 1;
-    let fixed = (weights == nn.vars.FIXED), length = nn.vars.WEIGHTS_SEED.length, index = nn.neuron_getIndex(nrn);
-    weights = (fixed ? nn.vars.WEIGHTS_SEED : weights).slice(0);
-    let pos = index%length; while (fixed && pos--) {weights.push(weights.shift());}
+  nn.neuron_setWeights = function (nrn, weights, scale) { // weights: null (neuron), [] (random), RESET (seed).
+    weights ||= nrn.weights||nn.vars.RESET; scale ||= 1;
+    let reset = (weights == nn.vars.RESET), length = nn.vars.WEIGHTS_SEED.length, index = nn.neuron_getIndex(nrn);
+    weights = (reset ? nn.vars.WEIGHTS_SEED : weights).slice();
+    let pos = index%length; while (reset && pos--) {weights.push(weights.shift());}
     for (let i = 0; i < nrn.parents.length; i++) {
-      if (weights.length <= i) {weights.push(fixed ? weights[weights.length%length] : Math.random()*2-1);}
+      if (weights.length <= i) {weights.push(reset ? weights[weights.length%length] : Math.random()*2-1);}
       weights[i] *= scale;
     }
     weights.length = nrn.parents.length;
@@ -390,7 +390,7 @@
     if ('length' in nwk) {nwk = {layers: nwk};}
     let i, j, lengths = []; nn.nets ??= {};
     nwk.name = nwk.name||'NN'; nn.nets[nwk.name] = nwk;
-    nwk.staticBias ||= 0;
+    nwk.dynamicBias ||= 0;
     nwk.adaptNeurons ||= 0;
     nwk.adaptRate ||= 0;
     nwk.training ||= 0;
@@ -461,7 +461,7 @@
     let lastlayer = nwk.layers.length-1, input = nwk.layers[0], output = nwk.layers.at(-1);
     nwk.trainingCycles ||= 0; nwk.trainingStart ||= Date.now();
     while (++cycle < nwk.trainingPeriod) {
-      match = 0; miss = 0; keys = keyset.slice(0);
+      match = 0; miss = 0; keys = keyset.slice();
       while (keys.length) {
         i = !nwk.shuffleData ? 0 : Math.floor(Math.random()*keys.length);
         nwk.selectedTarget = Number(keys.splice(i, 1)[0])||0;
@@ -559,7 +559,7 @@
       for (let j = 0; j < nwk.layers[i].length; j++) {
         let nrn = nwk.layers[i][j];
         if (!nrn.row || nrn.isOutput || nrn.isBias) {
-          nrn.isBias && nwk.staticBias && nrn.targets.fill(nrn.value); // same target for all
+          nrn.isBias && !nwk.dynamicBias && nrn.targets.fill(nrn.value); // static bias, same for all targets
           if (pos < nwk.targetsLength) {nrn.targets[pos] = nrn.value;
           } else {nrn.targets.push(nrn.value);}
         }
@@ -686,7 +686,7 @@
       exp.minOutputValue = nwk.minOutputValue; exp.maxOutputValue = nwk.maxOutputValue;
       exp.minDomainValue = nwk.minDomainValue; exp.maxDomainValue = nwk.maxDomainValue;
       exp.bias = nwk.bias;
-      exp.staticBias = nwk.staticBias;
+      exp.dynamicBias = nwk.dynamicBias;
     }
     exp.layers = [];
     for (i = 0; i < nwk.layers.length; i++) {
@@ -696,12 +696,12 @@
         if (!targetsonly) { // Sum not exported: node.sum = roundval ? Number(nrn.sum.toPrecision(roundval)) : nrn.sum;
           node.value = roundval ? Number(nrn.value.toPrecision(roundval)) : nrn.value;
           if (nrn.weights.length) {
-            node.weights = nrn.weights.slice(0);
+            node.weights = nrn.weights.slice();
             if (roundval) {for (k = 0; k < node.weights.length; k++) {node.weights[k] = Number(node.weights[k].toPrecision(roundval));}}
           }
         }
         if (nrn.targets.length) {
-          node.targets = nrn.targets.slice(0);
+          node.targets = nrn.targets.slice();
           if (roundval) {for (k = 0; k < node.targets.length; k++) {node.targets[k] = Number(node.targets[k].toPrecision(roundval));}}
         }
         exp.layers[i].push(node);
@@ -854,21 +854,23 @@
     if (!nn.view.canvasRender || !nn.canvas.offsetHeight) {return;}
     c2d.clearRect(0, 0, nn.view.width, nn.view.height); if (!nn.net) {nn.view.canvasRender = 0; return;}
     let i, nwk = nn.net, w2 = nn.view.width/2, h2 = nn.view.height/2-.25*nn.view.unit, sLen = 14, fe = nn.form.el;
-    let fcolor = nwk.training ? nn.view.c_ecolor : nn.view.c_fcolor, conv = nn.network_status(nwk);
+    let fcolor = nn.view.c_fcolor, tcolor = nwk.training ? nn.view.c_ecolor : fcolor, conv = nn.network_status(nwk);
     c2d.save();
     c2d.textAlign = 'right';
-    c2d.fillStyle = (conv > 0) ? nn.view.c_ecolor : (conv < 0) ? nn.view.c_scolor : nn.view.c_fcolor;
+    c2d.fillStyle = (conv > 0) ? nn.view.c_ecolor : (conv < 0) ? nn.view.c_scolor : fcolor;
     i = 'TRAIN'; if (nwk.trainingCycles) {i += ' ['+fe.data_stats.innerHTML+']'; if (nwk.training) {i += '['+fe.data_error.innerHTML+']';}}
     c2d.fillText(i, nn.view.width-nn.view.unit, 1.7*nn.view.unit);
     c2d.fillStyle = fcolor;
     c2d.textAlign = 'left';
     c2d.fillText('MENU', nn.view.unit, 1.7*nn.view.unit);
+    c2d.fillStyle = tcolor;
     c2d.textAlign = 'center';
     c2d.fillText('NEURAL NETWORK DESIGNER', w2, 1.7*nn.view.unit);
+    c2d.fillStyle = fcolor;
     c2d.fillText('\xa9 Javier Rey', w2, nn.view.height-1.3*nn.view.unit);
     let lCol = 4*nn.view.unit, rCol = nn.view.width-lCol;
     let lTop = 4.4*nn.view.unit, lBot = nn.view.height-4*nn.view.unit, rTop = 3.9*nn.view.unit, rBot = nn.view.height-4*nn.view.unit, hTop = -6;
-    let bTop = 4.2*nn.view.unit, bBot = nn.view.height-4.3*nn.view.unit, biasText = '> BIAS';
+    let bTop = 4.2*nn.view.unit, bBot = nn.view.height-4.3*nn.view.unit, biasText = '< BIAS';
     let bias = nwk.bias*(nwk.layers.length-1);
     let lays = (nwk.layers.length < 2) ? 0 : nwk.layers.length-2;
     let hid = !lays ? Number(fe.hidden_neurons.value)||0 : nwk.layers[1].length-nwk.bias, hiddenNeurons = nn.roundNumberFormat(hid, 4, 0);
@@ -876,8 +878,8 @@
     let out = nwk.layers.at(-1).length, outputNeurons = nn.roundNumberFormat(out, 4, 0);
     c2d.fillText(nwk.name.substring(0, sLen), rCol, h2+hTop*nn.view.unit); // I+O+HxL+B:
     c2d.fillText(inputNeurons+'+'+outputNeurons+'+'+hiddenNeurons+'x'+lays+'+'+bias, rCol, h2+(hTop+1)*nn.view.unit);
-    c2d.fillText('H-Off '+nn.view.canvasOffsetCol+' / '+nn.view.canvasLastOffsetCol, rCol, h2+(hTop+2)*nn.view.unit);
-    c2d.fillText('V-Off '+nn.view.canvasOffsetRow+' / '+nn.view.canvasLastOffsetRow, rCol, h2+(hTop+3)*nn.view.unit);
+    c2d.fillText('C-Off '+nn.view.canvasOffsetCol+' / '+nn.view.canvasLastOffsetCol, rCol, h2+(hTop+2)*nn.view.unit);
+    c2d.fillText('R-Off '+nn.view.canvasOffsetRow+' / '+nn.view.canvasLastOffsetRow, rCol, h2+(hTop+3)*nn.view.unit);
     c2d.fillStyle = fcolor;
     c2d.fillText('DATASET', rCol, h2+(hTop+5)*nn.view.unit);
     c2d.fillStyle = nwk.targetsLength >= 2 ? fcolor : nn.view.c_ecolor;
@@ -889,15 +891,15 @@
     c2d.fillStyle = fcolor;
     c2d.fillText('LEARNING', rCol, h2+(hTop+10)*nn.view.unit);
     c2d.fillStyle = fcolor; // !nwk.dataDiff || nwk.learningMatch/nwk.dataDiff < .5 ? fcolor : nn.view.c_ecolor // @show/hide color
-    c2d.fillText('Match '+fe.learning_match.value, rCol, h2+(hTop+11)*nn.view.unit);
+    c2d.fillText('Aim '+fe.learning_match.value, rCol, h2+(hTop+11)*nn.view.unit);
     c2d.fillStyle = fcolor; // !nwk.valueDiff || nwk.learningRate/nwk.valueDiff < 1 ? fcolor : nn.view.c_ecolor // @show/hide color
     c2d.fillText('Rate '+fe.learning_rate.value, rCol, h2+(hTop+12)*nn.view.unit);
     c2d.fillStyle = fcolor;
-    if (!nwk.selectedNeuron) {
+    if (!nwk.selectedNeuron?.row || nwk.selectedNeuron.isBias) {
       c2d.fillText('ACTIVATION', lCol, h2);
       c2d.fillText(nwk.activationMethod, lCol, h2+nn.view.unit);
     } else {nn.drawActivationGraph(nwk.selectedNeuron);}
-    if (nn.view.topDown < 0) {i = lBot; lBot = lTop; lTop = i; i = rBot; rBot = rTop; rTop = i; i = bBot; bBot = bTop; bTop = i; biasText = 'BIAS <';}
+    if (nn.view.topDown < 0) {i = lBot; lBot = lTop; lTop = i; i = rBot; rBot = rTop; rTop = i; i = bBot; bBot = bTop; bTop = i; biasText = 'BIAS >';}
     c2d.fillText('INPUT >', lCol, lTop);
     c2d.fillText('OUTPUT <', lCol, lBot);
     if (nwk.bias) {
@@ -978,20 +980,20 @@
     nwk ??= nn.net; if (nwk && nwk.training > 0) {nn.changeTraining(nwk, -2);}
   };
 
-  nn.changeTraining = function (nwk, tr) {
+  nn.changeTraining = function (nwk, trn) {
     nwk ??= nn.net; if (!nwk || !nwk.targetsLength) {return;}
-    if (tr == null || isNaN(tr)) {tr = nwk.training ? 0 : 1;}
-    if (!tr && nwk.training > 0) {nwk.training = -2;}
-    if (tr <= 0) {
+    if (trn == null || isNaN(trn)) {trn = nwk.training ? 0 : 1;}
+    if (!trn && nwk.training > 0) {nwk.training = -2;}
+    if (trn <= 0) {
       if (nn.autoExport) {nn.exportNetwork(nwk);} // && !fE.net_json.value.trim()
-      if (nn.enableBeep && !tr) {nn.vars.beep.play();}
+      if (nn.enableBeep && !trn) {nn.vars.beep.play();}
     } else {
       if (!nn.extendStats) {nwk.trainingTime = nwk.trainingCycles = nwk.trainingError = nwk.trainingDelta = 0;}
       nwk.trainingStart = Date.now()-nwk.trainingTime; nn.enableBeep = 0; clearTimeout(nn.vars.enableBeep_to||0);
       nn.vars.enableBeep_to = setTimeout(function () {nn.enableBeep = Number(fE.enable_beep.value);}, 5e3);
     }
-    if (tr || nwk.training >= 0) {nwk.training = tr;}
-    nn.renderStats(nwk, 1); nwk.training = tr;
+    if (trn || nwk.training >= 0) {nwk.training = trn;}
+    nn.renderStats(nwk, 1); nwk.training = trn;
     nn.toggleElementStyleClass(fE.train_data, nn.view.f_e_fcolor_sc, nn.view.f_d_fcolor_sc, nwk.training);
     if (nn.worker) {
       nn.worker.postMessage('nn.net = new nn.Network('+nn.network_serialize(nwk)+');');
@@ -1141,15 +1143,16 @@
     if (hiddenNeurons < 1) {hiddenNeurons = 1;}
     let inputNeurons = nwk.layers[0].length-nwk.bias;
     let outputNeurons = nwk.layers[nwk.layers.length-1].length;
-    let biasNeurons = nwk.bias*(hiddenLayers+1);
+    let biasNeurons = nwk.bias*(hiddenLayers+1), dynamicBias = nwk.dynamicBias ? 'Dynamic' : 'Static';
     fE.network_name.value = nwk.name;
     fE.bias_neurons.value = nwk.bias;
-    fE.static_bias.value = nwk.staticBias;
+    fE.dynamic_bias.value = nwk.dynamicBias;
     fE.input_neurons.value = inputNeurons;
     fE.output_neurons.value = outputNeurons;
     fE.hidden_neurons.value = hiddenNeurons;
     fE.hidden_layers.value = hiddenLayers;
     fE.bias_neurons_label.innerHTML = ''+biasNeurons;
+    fE.dynamic_bias_label.innerHTML = ''+dynamicBias;
     fE.activation_method.value = nwk.activationMethod;
     fE.min_input_value.value = nwk.minInputValue; fE.min_input_value_label.innerHTML = ''+nwk.minInputValue;
     fE.max_input_value.value = nwk.maxInputValue; fE.max_input_value_label.innerHTML = ''+nwk.maxInputValue;
@@ -1198,7 +1201,7 @@
 
   nn.setLayers = function (nwk) {
     nwk ??= nn.net; if (!nwk) {return;}
-    nwk.staticBias = Number(fE.static_bias.value)||0;
+    nwk.dynamicBias = Number(fE.dynamic_bias.value)||0;
     let i, bias = Number(fE.bias_neurons.value)||0;
     let hiddenLayers = Number(fE.hidden_layers.value)||0; if (hiddenLayers < 0) {hiddenLayers = 0;}
     let hiddenNeurons = Number(fE.hidden_neurons.value)||1; if (hiddenNeurons < 1) {hiddenNeurons = 1;}
@@ -1275,7 +1278,7 @@
   nn.createNetwork = function (name) {
     let i, nwk = {}; nwk.name = name||'NN';
     nwk.bias = Number(fE.bias_neurons.value)||0;
-    nwk.staticBias = Number(fE.static_bias.value)||0;
+    nwk.dynamicBias = Number(fE.dynamic_bias.value)||0;
     let inputNeurons = Number(fE.input_neurons.value)||1;
     let outputNeurons = Number(fE.output_neurons.value)||1;
     let hiddenNeurons = Number(fE.hidden_neurons.value)||1;
@@ -1469,8 +1472,8 @@
   };
 
   nn.setCanvas = function (theme) {
-    let canvasContainer = nn.container.querySelector('[x-id="nn_canvas_container"]');
-    nn.canvas = canvasContainer.querySelector('canvas');
+    let canvasContainer = qs('[x-id="nn_canvas_container"]', nn.container);
+    nn.canvas = qs('canvas', canvasContainer);
     if (!nn.canvas) {
       nn.canvas = document.createElement('canvas');
       canvasContainer.appendChild(nn.canvas);
@@ -1493,7 +1496,7 @@
       for (i in nn.form.el) {el = nn.form.el[i]; if (el.tagName) {el.onclick = el.onchange = el.oninput = null;}}
     }
     if (on < 0) {return;}
-    nn.form = nn.container.querySelector('[x-id="nn_form_content"]')??document;
+    nn.form = qs('[x-id="nn_form_content"]', nn.container) ?? document;
     fE = nn.form.el = {};
     let eventListener = function (ev) {
       let tgt = ev.target, num = Number(tgt.value); if (ev.type == 'input') {tgt.onchange = null;}
@@ -1510,7 +1513,7 @@
       if (tgt == fE.hidden_neurons_higher) {tgt = fE.hidden_neurons; num = Number(tgt.value); tgt.value = num+1;}
       if (tgt == fE.hidden_layers_lower) {tgt = fE.hidden_layers; num = Number(tgt.value); tgt.value = num-1;}
       if (tgt == fE.hidden_layers_higher) {tgt = fE.hidden_layers; num = Number(tgt.value); tgt.value = num+1;}
-      [fE.bias_neurons, fE.static_bias, fE.hidden_layers, fE.hidden_neurons, fE.input_neurons, fE.output_neurons]
+      [fE.bias_neurons, fE.dynamic_bias, fE.hidden_layers, fE.hidden_neurons, fE.input_neurons, fE.output_neurons]
         .includes(tgt) && nn.setLayers(null);
       if (tgt == fE.min_input_value) {nn.setActivation(null, null, {min: num}, null, null);
       } else if (tgt == fE.max_input_value) {nn.setActivation(null, null, {max: num}, null, null);
@@ -1525,7 +1528,7 @@
       } else if (tgt == fE.learning_rate_higher) {nn.setLearning(null, null, -1.33, null, null);
       } else if (tgt == fE.adapt_rate) {nn.setLearning(null, null, null, num, null);
       } else if (tgt == fE.adapt_neurons) {nn.setLearning(null, null, null, null, num);}
-      if (tgt == fE.fixed_weights) {nn.setWeights(null, nn.vars.FIXED, null);
+      if (tgt == fE.fixed_weights) {nn.setWeights(null, nn.vars.RESET, null);
       } else if (tgt == fE.random_weights) {nn.setWeights(null, [], null);
       } else if (tgt == fE.lose_weights) {nn.setWeights(null, null, .5);}
       if (tgt == fE.col_offset || tgt == fE.row_offset) {nn.offsetView(null, null, null);}
@@ -1574,7 +1577,7 @@
     el = fE.min_domain_value = qs('[x-id="min_domain_value"]', nn.form)??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.max_domain_value = qs('[x-id="max_domain_value"]', nn.form)??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.bias_neurons = qs('[x-id="bias_neurons"]', nn.form)??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
-    el = fE.static_bias = qs('[x-id="static_bias"]', nn.form)??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
+    el = fE.dynamic_bias = qs('[x-id="dynamic_bias"]', nn.form)??{}; if (el.tagName) {el.oninput = el.onchange = eventListener;}
     el = fE.hidden_layers = qs('[x-id="hidden_layers"]', nn.form)??{}; if (el.tagName) {el.onchange = eventListener;}
     el = fE.hidden_layers_lower = qs('[x-id="hidden_layers_lower"]', nn.form)??{}; if (el.tagName) {el.onclick = eventListener;}
     el = fE.hidden_layers_higher = qs('[x-id="hidden_layers_higher"]', nn.form)??{}; if (el.tagName) {el.onclick = eventListener;}
@@ -1616,6 +1619,7 @@
     fE.data_error = qs('[x-id="data_error"]', nn.form)??{};
     fE.data_sets = qs('[x-id="data_sets"]', nn.form)??{};
     fE.net_json = qs('[x-id="net_json"]', nn.form)??{};
+    fE.dynamic_bias_label = qs('[x-id="dynamic_bias_label"]', nn.form)??{};
     fE.selected_neuron_label = qs('[x-id="selected_neuron_label"]', nn.form)??{};
     fE.col_offset_label = qs('[x-id="col_offset_label"]', nn.form)??{};
     fE.max_col_offset_label = qs('[x-id="max_col_offset_label"]', nn.form)??{};
@@ -1722,8 +1726,8 @@
   };
 
   (function ready() {
-    nn.content = (nn.ini.container??document).querySelector('[x-id="nn_content"]');
-    if (!nn.content?.querySelector('[x-id="nn_canvas_container"]')) return setTimeout(ready, nn.vars.ms.LISTEN);
+    nn.content = qs('[x-id="nn_content"]', nn.ini.container);
+    if (!qs('[x-id="nn_canvas_container"]', nn.content)) return setTimeout(ready, nn.vars.ms.LISTEN);
     let i; nn.ini.container = nn.ini.container??nn.content.parentNode??document.body;
     for (i in nn.ini) {if (i in nn) {nn[i] = nn.ini[i];}}
     i = ''+nn.ini.theme; i = (i.indexOf('light') != -1 && i.indexOf('dark') == -1) ? 'light' : null;
