@@ -2,6 +2,8 @@
 
 A quick overview of how a neural network works.
 
+A neural network is an input-output system that attempts to predict unknown results based on the pattern of known samples.
+
 ## A simple problem
 
 We have a number of boxes of different sizes and we want to know if they fit in a given container.
