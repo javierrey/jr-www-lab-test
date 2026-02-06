@@ -40,8 +40,8 @@
 
   /** Ported from view.js. */
   const ge = (id) => document.getElementById(id);
-  const qs = (sel, el = document) => el?.querySelector?.(sel);
-  const qa = (sel, el = document) => el?.querySelectorAll?.(sel);
+  const qs = (sel, el = document) => el?.querySelector?.(sel) ?? null;
+  const qa = (sel, el = document) => el?.querySelectorAll?.(sel) ?? null;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
