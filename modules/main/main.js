@@ -193,9 +193,8 @@
     });
   };
   mod.loadNND = function () {
-    var layout = aa.Main.i0.content; !aa.vars.homeLoaded && aa.lay.visHFLR(layout, 0, 0);
+    var layout = aa.Main.i0.content; !aa.vars.homeLoaded && aa.lay.visHFLR(layout, 0, 0); // aa.nn?.destroy?.();
     self.input = mod.ini.nn; if (self.input && !self.input.theme) {self.input.theme = mod.ini.theme;} // Hide/Show theme inheritance.
-    aa.nn?.destroy?.();
     aa.app.loadResource({url: "./modules/nnd/nnd.htm", tag: "xhr",
       loaded: function (rsc) {
         aa.lay.inBM(layout, aa.app.getResult(rsc), null, function (ctr, scripts) {

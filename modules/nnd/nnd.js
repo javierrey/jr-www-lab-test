@@ -1722,7 +1722,7 @@
   nn.destroy = function () {
     nn.setEvents(-1); nn.setForm(-1); nn.setWorker(-1);
     nn.worker = nn.form = nn.canvas = nn.net = nn.nets = null;
-    setTimeout(function () {aa.nn = null;}, 0);
+    aa.nn = null; // no setTimeout
   };
 
   (function ready() {
